@@ -1,11 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
-import {
-  SendchampConstructor,
-} from './constants/interfaces';
+import { SendchampConstructor } from './constants/interfaces';
 import { baseUrl } from './constants/endpoints';
-import {
-  SMS,
-} from './services';
+import { SMS } from './services';
 
 class Sendchamp {
   private axiosInstance: AxiosInstance;
