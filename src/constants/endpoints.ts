@@ -14,6 +14,8 @@ const endpoints: SendchampEndpoints = Object.freeze({
   getReport: (sms_message_id: string): string =>
     `sms/${sms_message_id}/report`,
   REGISTER_SENDER: 'sms/sender/create',
+  SEND_VERIFICATION_OTP: 'verification/create',
+  VERIFY_VERIFICATION_OTP: 'verification/confirm',
 });
 
 export default endpoints;
