@@ -67,7 +67,7 @@ After initialization, you can get instances of offered services as follows:
 - VERIFICATION Service: ```sendchamp.VERIFICATION```
 
 ## Services
-All methods are asynchronous
+All methods are asynchronous.<br/>
 All phone numbers are international format (without the plus symbol). e.g <mark>2348153207998</mark>.
 
 ### SMS Service
@@ -97,7 +97,47 @@ All phone numbers are international format (without the plus symbol). e.g <mark>
 
   - ```sample```: This should contain your sample message. <br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
-### EMAIL Service
+### VOICE Service
 ```javascript
-    const email = sendchamp.EMAIL;
+    const voice = sendchamp.VOICE;
 ```
+
+- ```voice.send({message, customer_mobile_number})```: This method allows you to send a text-to-speech voice call.
+
+  - ```message```: The text message you to send with voice.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```customer_mobile_number```: The number represents the destination phone number. The number must be in international format (E.g. <b>2348012345678</b>) <br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+
+### VERIFICATION Service
+```javascript
+    const verification = sendchamp.VERIFICATION;
+```
+
+- ```verification.sendOTP({channel, sender, token_type, token_length, expiration_time, customer_email, customer_mobile_number, meta_data})```: This method is used to send Verification OTP (One Time Password) to your customer contact address.
+
+  - ```channel```: <b>VOICE</b>, <b>SMS</b>, <b>WHATSAPP</b> or <b>EMAIL</b>.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```sender```: Specify the sender you want to use. This is important when using SMS OR Whatsapp Channel or we will select a default sender from your account. Eg: KUDA OR +234810000000.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```token_type```: <b>NUMERIC</b> or <b>ALPHANUMERIC.</b><br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```token_length```: The length of the token you want to send to your customer. Minimum is 4.<br/> <mark>INTEGER</mark> <mark>REQUIRED</mark>
+
+  - ```expiration_time```: How long you want to the to be active for in minutes. (E.g 10 means 10 minutes ).<br/> <mark>INTEGER</mark> <mark>REQUIRED</mark>
+
+  - ```customer_email```: The email address of your customer. It's required if you're using Email Channel.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```customer_mobile_number```: The phone number of your customer. It must be in international format (E.g 2348012345678). It is required if you're using the SMS or Voice Channel.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```meta_data```: To pass additional information as an object.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+- ```verification.verifyOTP({verification_reference, verification_otp})```: This method is used to confirm the OTP that was sent to your customer.
+
+  - ```verification_reference```: The unique reference that was returned as response when the OTP was created.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```verification_otp```: The OTP that was sent to the customer.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+
+## Issues
+If you find a bug, please file an issue on [the issue tracker](https://github.com/fuadop/sendchamp-sdk/issues).
