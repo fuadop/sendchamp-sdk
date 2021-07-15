@@ -75,13 +75,15 @@ All phone numbers are international format (without the plus symbol). e.g <mark>
     const sms = sendchamp.SMS;
 ```
 
-- ```sms.send({to, message, sender_name})```: API for sending SMS.
+- ```sms.send({to, message, sender_name, route})```: API for sending SMS.
   
   - ```to``` : This represents the destination phone number. The phone number(s) must be in the international format (Example: 23490126727). You can also send to multiple numbers. To do that put numbers in an array (Example: [ '234somenumber', '234anothenumber' ]). <br/><mark>REQUIRED</mark>
   
   - ```message``` : Text message being sent. <br/> <mark>STRING</mark> <mark>REQUIRED</mark>
   
   - ```sender_name``` : Represents the sender of the message. This Sender ID must have been requested via the dashboard or use "Sendchamp" as default.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```route``` : Here you can specify a route you want your SMS to go through. Read [this guide](https://support.sendchamp.com/article/14-sms-delivery-routing-guide) for routing options. You should pass either of the following: <b>NON_DND_NG</b>, <b>DND_NG</b>, or <b>PREMIUM_NG</b>. <br/> <mark>STRING</mark> <mark>OPTIONAL</mark>
 
 - ```sms.getStatus(sms_message_id)```: API to retrieve the status of an already sent SMS. 
 
@@ -91,7 +93,7 @@ All phone numbers are international format (without the plus symbol). e.g <mark>
 
   - ```sender_name```: Represents the sender of the message. <br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
-  - ```use_case```: You should pass either of the following: Transactional, Marketing, or Transactional & Marketing. <br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+  - ```use_case```: You should pass either of the following: <b>Transactional</b>, <b>Marketing</b>, or <b>Transactional & Marketing</b>. <br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
   - ```sample```: This should contain your sample message. <br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
