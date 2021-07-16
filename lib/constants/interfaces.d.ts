@@ -1,7 +1,7 @@
 import { SendchampMode, SendchampStatus } from './types';
 export interface SendchampConstructor {
     publicKey: string;
-    mode: SendchampMode;
+    mode?: SendchampMode;
 }
 export interface SendchampEndpoints {
     SEND_SMS: string;
@@ -10,6 +10,8 @@ export interface SendchampEndpoints {
     REGISTER_SENDER: string;
     SEND_VERIFICATION_OTP: string;
     VERIFY_VERIFICATION_OTP: string;
+    SEND_WHATSAPP: string;
+    SEND_WHATSAPP_TEMPLATE: string;
 }
 export interface SendchampBaseURLS {
     LIVE: string;
@@ -24,12 +26,7 @@ export interface SendSMSConfig {
 export interface SendVOICEConfig {
     message: string;
     customer_mobile_number: string;
-}
-export interface SendWHATSAPPTemplateConfig {
-    sender: string;
-    recipient: string;
-    template_code: string;
-    message: string;
+    sender_name: string;
 }
 export interface SendVERIFICATIONOTPConfig {
     channel: 'VOICE' | 'SMS' | 'WHATSAPP' | 'EMAIL';
@@ -39,7 +36,7 @@ export interface SendVERIFICATIONOTPConfig {
     expiration_time: number;
     customer_email?: string;
     customer_mobile_number?: string;
-    meta_data: Record<string | number, unknown>;
+    meta_data?: Record<string | number, unknown>;
 }
 export interface VerifyVERIFICATIONOTPConfig {
     verification_reference: string;
@@ -49,6 +46,57 @@ export interface RegisterSenderConfig {
     sender_name: string;
     use_case: 'Transactional' | 'Marketing' | 'Transactional & Marketing';
     sample: string;
+}
+export interface SendWHATSAPPTemplateConfig {
+    sender: string;
+    recipient: string;
+    template_code: string;
+    message: string;
+}
+export interface SendWHATSAPPTextConfig {
+    recipient: string;
+    sender: string;
+    type?: 'text';
+    message: string;
+}
+export interface SendWHATSAPPImageConfig {
+    recipient: string;
+    from: string;
+    type?: 'image';
+    link: string;
+    caption: string;
+}
+export interface SendWHATSAPPVideoConfig {
+    recipient: string;
+    from: string;
+    type?: 'video';
+    link: string;
+    caption: string;
+}
+export interface SendWHATSAPPAudioConfig {
+    recipient: string;
+    from: string;
+    type?: 'audio';
+    link: string;
+}
+export interface SendWHATSAPPDocumentConfig {
+    recipient: string;
+    from: string;
+    type?: 'document';
+    link: string;
+    caption: string;
+}
+export interface SendWHATSAPPLocationConfig {
+    recipient: string;
+    from: string;
+    type?: 'location';
+    location: SendLocationBody;
+}
+interface SendLocationBody {
+    longitude: number;
+    latitude: number;
+    name: string;
+    address: string;
 }
 export interface SendSMSResponse {
     message: string;
