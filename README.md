@@ -138,6 +138,82 @@ All phone numbers are international format (without the plus symbol). e.g <mark>
 
   - ```verification_otp```: The OTP that was sent to the customer.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
+### WHATSAPP Service
+```javascript
+    const whatsapp = sendchamp.WHATSAPP;
+```
+
+- ```whatsapp.sendTemplate({sender, recipient, template_code, message})```: Send highly structured messages to your customers based on approved template.
+
+  - ```sender```: Your approved Whatsapp number on Sendchamp. You can use our phone number if you have not registered a number <b>2347067959173</b>.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```recipient```: Whatsapp number of the customer you are sending the message to.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```template_code```: You can find this on the template page under Whatsapp Channel of your Sendchamp dashboard.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```message```: This is the message based on the template approved on Sendchamp Dashboard.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+- ```whatsapp.sendText({sender, recipient, message})```: Utilize this method to send text messages via WhatsApp.
+
+  - ```sender```: This will be the activated Whatsapp phone number E.g 234810000000.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```recipient```: This will be the phone number of the customer E.g 234811111111.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```message```: message to customer.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+- ```whatsapp.sendImage({from, recipient, link, caption})```: Utilize this method to send images via WhatsApp.
+
+  - ```from```: This will be the activated Whatsapp phone number E.g 234810000000.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```recipient```: This will be the phone number of the customer E.g 234811111111.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```link```: This is the URL to the image resource.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```caption```: This is the caption to be dispalyed under the image in the chat.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+- ```whatsapp.sendVideo({from, recipient, link, caption})```: Utilize this method to send videos via WhatsApp.
+
+  - ```from```: This will be the activated Whatsapp phone number E.g 234810000000.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```recipient```: This will be the phone number of the customer E.g 234811111111.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```link```: This is the URL to the video resource.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```caption```: This is the caption to be dispalyed under the video in the chat.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+- ```whatsapp.sendAudio({from, recipient, link})```: Utilize this method to send audio via WhatsApp.
+
+  - ```from```: This will be the activated Whatsapp phone number E.g 234810000000.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```recipient```: This will be the phone number of the customer E.g 234811111111.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```link```: This is the URL to the audio resource.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+- ```whatsapp.sendDocument({from, recipient, link, caption})```: Utilize this method to send documents via WhatsApp.
+
+  - ```from```: This will be the activated Whatsapp phone number E.g 234810000000.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```recipient```: This will be the phone number of the customer E.g 234811111111.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```link```: This is the URL to the document resource.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```caption```: This is the caption to be dispalyed under the document in the chat.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+- ```whatsapp.sendLocation({from, recipient, location})```: Utilize this method to send locations via WhatsApp.
+
+  - ```from```: This will be the activated Whatsapp phone number E.g 234810000000.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```recipient```: This will be the phone number of the customer E.g 234811111111.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```location```: An object that describes the location:
+
+    - ```longitude```: The longitude of the location E.g <b>-46.662787</b>.<br/> <mark>NUMBER</mark> <mark>REQUIRED</mark>
+
+    - ```latitude```: The latitude of the location E.g <b>-23.55361</b>.<br/> <mark>NUMBER</mark> <mark>REQUIRED</mark>
+
+    - ```name```: The name of the location E.g <b>Robbu Brazil</b>. <br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+    - ```address```: The address of the location E.g <b>Av. Angélica, 2530 - Bela Vista, São Paulo - SP, 01228-200</b>. <br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
 ## Issues
 If you find a bug, please file an issue on [the issue tracker](https://github.com/fuadop/sendchamp-sdk/issues).
