@@ -15,8 +15,18 @@
     "type": "git",
     "url": "git+https://github.com/fuadop/sendchamp-sdk.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "otp",
+    "email",
+    "sms",
+    "sendchamp",
+    "send",
+    "verification",
+    "voice",
+    "call",
+    "sender"
+  ],
+  "author": "Fuad Olatunji",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/fuadop/sendchamp-sdk/issues"
