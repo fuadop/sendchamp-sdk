@@ -1,6 +1,6 @@
 {
   "name": "sendchamp-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An SDK for sendchamp.com",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
