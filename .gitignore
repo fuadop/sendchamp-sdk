@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+ 
+# Temporary test file
+src/temp_test.ts

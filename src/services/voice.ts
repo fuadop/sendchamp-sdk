@@ -6,12 +6,18 @@ class VOICE {
   static axiosInstance: AxiosInstance;
 
   send = async (config: SendVOICEConfig): Promise<unknown> => {
-    const response: AxiosResponse<unknown> = await VOICE.axiosInstance({
-      url: endpoints.SEND_VOICE,
-      data: config,
-    });
+    try {
+      const response: AxiosResponse<unknown> = await VOICE.axiosInstance({
+        url: endpoints.SEND_VOICE,
+        method: 'POST',
+        data: config,
+      });
 
-    return response.data as SendVOICEResponse;
+      return response.data as SendVOICEResponse;
+    } catch ({ response }) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      return response.data as unknown;
+    }
   };
 }
 
