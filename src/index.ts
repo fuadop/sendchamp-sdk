@@ -5,6 +5,7 @@ import {
   SMS,
   VOICE,
   VERIFICATION,
+  WHATSAPP,
 } from './services';
 
 class Sendchamp {
@@ -15,6 +16,8 @@ class Sendchamp {
   public VOICE: VOICE = new VOICE();
 
   public VERIFICATION: VERIFICATION = new VERIFICATION();
+
+  public WHATSAPP: WHATSAPP = new WHATSAPP();
 
   constructor(config: SendchampConstructor) {
     const { publicKey, mode } = config;
@@ -31,6 +34,7 @@ class Sendchamp {
     SMS.axiosInstance = this.axiosInstance;
     VOICE.axiosInstance = this.axiosInstance;
     VERIFICATION.axiosInstance = this.axiosInstance;
+    WHATSAPP.axiosInstance = this.axiosInstance;
   }
 }
 

@@ -16,6 +16,8 @@ const endpoints: SendchampEndpoints = Object.freeze({
   REGISTER_SENDER: 'sms/sender/create',
   SEND_VERIFICATION_OTP: 'verification/create',
   VERIFY_VERIFICATION_OTP: 'verification/confirm',
+  SEND_WHATSAPP: 'whatsapp/message/send',
+  SEND_WHATSAPP_TEMPLATE: 'whatsapp/template/send',
 });
 
 export default endpoints;
