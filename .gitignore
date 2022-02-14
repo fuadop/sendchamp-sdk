@@ -106,3 +106,4 @@ dist
 # Temporary test file
 src/temp_test.ts
 lib
+package-lock.json
