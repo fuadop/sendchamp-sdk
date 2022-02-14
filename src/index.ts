@@ -38,4 +38,4 @@ class Sendchamp {
   }
 }
 
-module.exports = Sendchamp;
+export = Sendchamp;
