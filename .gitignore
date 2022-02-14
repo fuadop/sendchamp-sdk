@@ -105,5 +105,4 @@ dist
  
 # Temporary test file
 src/temp_test.ts
-lib/temp_test.js
-lib/temp_test.d.ts
+lib
