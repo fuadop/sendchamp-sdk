@@ -1,4 +1,4 @@
-import { AxiosInstance, AxiosResponse } from 'axios';
+import { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import {
   SendVERIFICATIONOTPConfig,
   SendVERIFICATIONOTPResponse,
@@ -19,9 +19,9 @@ class VERIFICATION {
       });
 
       return response.data as SendVERIFICATIONOTPResponse;
-    } catch ({ response }) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      return response.data as unknown;
+    } catch (error) {
+      const { response } = (error as AxiosError);
+      return response!.data as unknown;
     }
   };
 
@@ -35,9 +35,9 @@ class VERIFICATION {
       });
 
       return response.data as VerifyVERIFICATIONOTPResponse;
-    } catch ({ response }) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      return response.data as unknown;
+    } catch (error) {
+      const { response } = (error as AxiosError);
+      return response!.data as unknown;
     }
   };
 }

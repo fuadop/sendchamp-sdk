@@ -1,4 +1,4 @@
-import { AxiosInstance, AxiosResponse } from 'axios';
+import { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import endpoints from '../constants/endpoints';
 import {
   SendWHATSAPPAudioConfig,
@@ -22,9 +22,9 @@ class WHATSAPP {
       });
 
       return response.data;
-    } catch ({ response }) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      return response.data as unknown;
+    } catch (error) {
+      const { response } = (error as AxiosError);
+      return response!.data as unknown;
     }
   };
 
@@ -38,9 +38,9 @@ class WHATSAPP {
       });
 
       return response.data;
-    } catch ({ response }) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      return response.data as unknown;
+    } catch (error) {
+      const { response } = (error as AxiosError);
+      return response!.data as unknown;
     }
   };
 
@@ -54,9 +54,9 @@ class WHATSAPP {
       });
 
       return response.data;
-    } catch ({ response }) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      return response.data as unknown;
+    } catch (error) {
+      const { response } = (error as AxiosError);
+      return response!.data as unknown;
     }
   };
 
@@ -70,9 +70,9 @@ class WHATSAPP {
       });
 
       return response.data;
-    } catch ({ response }) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      return response.data as unknown;
+    } catch (error) {
+      const { response } = (error as AxiosError);
+      return response!.data as unknown;
     }
   };
 
@@ -86,9 +86,9 @@ class WHATSAPP {
       });
 
       return response.data;
-    } catch ({ response }) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      return response.data as unknown;
+    } catch (error) {
+      const { response } = (error as AxiosError);
+      return response!.data as unknown;
     }
   };
 
@@ -102,9 +102,9 @@ class WHATSAPP {
       });
 
       return response.data;
-    } catch ({ response }) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      return response.data as unknown;
+    } catch (error) {
+      const { response } = (error as AxiosError);
+      return response!.data as unknown;
     }
   };
 
@@ -118,9 +118,9 @@ class WHATSAPP {
       });
 
       return response.data;
-    } catch ({ response }) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      return response.data as unknown;
+    } catch (error) {
+      const { response } = (error as AxiosError);
+      return response!.data as unknown;
     }
   };
 }

@@ -12,6 +12,7 @@
     "func-names": "off",
     "implicit-arrow-linebreak": ["error", "below"],
     "no-use-before-define": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "@typescript-eslint/no-non-null-assertion": "off"
   }
 }
