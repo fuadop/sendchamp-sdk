@@ -1,4 +1,4 @@
-import { AxiosInstance, AxiosResponse } from 'axios';
+import { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import endpoints from '../constants/endpoints';
 import {
   RegisterSenderConfig,
@@ -18,9 +18,9 @@ class SMS {
       });
 
       return response.data as SendSMSResponse;
-    } catch ({ response }) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      return response.data as unknown;
+    } catch (error) {
+      const { response } = (error as AxiosError);
+      return response!.data as unknown;
     }
   };
 
@@ -32,9 +32,9 @@ class SMS {
       });
 
       return response.data;
-    } catch ({ response }) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      return response.data as unknown;
+    } catch (error) {
+      const { response } = (error as AxiosError);
+      return response!.data as unknown;
     }
   };
 
@@ -47,9 +47,9 @@ class SMS {
       });
 
       return response.data;
-    } catch ({ response }) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      return response.data as unknown;
+    } catch (error) {
+      const { response } = (error as AxiosError);
+      return response!.data as unknown;
     }
   };
 }
