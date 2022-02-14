@@ -22,7 +22,7 @@ export interface SendchampBaseURLS {
 }
 
 export interface SendSMSConfig {
-  route?: 'NON_DND_NG' | 'DND_NG' | 'PREMIUM_NG',
+  route?: 'non_dnd' | 'dnd' | 'international',
   to: string | Array<string>,
   message: string,
   sender_name: string,
