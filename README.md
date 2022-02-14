@@ -36,6 +36,8 @@ const options = {
   to: ['2348153207998'],
   message: 'Hello from postman',
   sender_name: 'sendchamp',
+  // optional option to set route
+  route: 'international' // can be set to non_dnd, dnd or international, default it non_dnd
 };
 
 sms.send(options)
