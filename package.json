@@ -1,11 +1,11 @@
 {
   "name": "sendchamp-sdk",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "An SDK for sendchamp.com",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
-    "lib/**/*"
+    "lib"
   ],
   "scripts": {
     "test": "jest --detectOpenHandles --silent",
