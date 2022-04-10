@@ -35,9 +35,9 @@ export interface SendVOICEConfig {
 }
 
 export interface SendVERIFICATIONOTPConfig {
-  channel: 'VOICE' | 'SMS' | 'WHATSAPP' | 'EMAIL',
+  channel: 'sms' | 'email',
   sender: string,
-  token_type: 'NUMERIC' | 'ALPHANUMERIC',
+  token_type: 'numeric' | 'alphanumeric',
   token_length: number,
   expiration_time: number, // In minutes
   customer_email?: string,
@@ -52,7 +52,7 @@ export interface VerifyVERIFICATIONOTPConfig {
 
 export interface RegisterSenderConfig {
   sender_name: string,
-  use_case: 'Transactional' | 'Marketing' | 'Transactional & Marketing',
+  use_case: 'transactional' | 'marketing' | 'transaction_marketing',
   sample: string,
 }
 
