@@ -217,5 +217,13 @@ All phone numbers are international format (without the plus symbol). e.g <mark>
 
     - ```address```: The address of the location E.g <b>Av. Angélica, 2530 - Bela Vista, São Paulo - SP, 01228-200</b>. <br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
+## Contributing
+PRs are greatly appreciated, help us build this hugely needed tool so anyone else can easily integrate sendchamp into their JavaScript based projects and applications.
+
+1. Create a fork
+2. Create your feature branch: git checkout -b my-feature
+3. Commit your changes: git commit -am 'Add some feature'
+4. Push to the branch: git push origin my-new-feature
+5. Submit a pull request 🚀
 ## Issues
 If you find a bug, please file an issue on [the issue tracker](https://github.com/fuadop/sendchamp-sdk/issues).
