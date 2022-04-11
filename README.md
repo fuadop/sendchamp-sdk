@@ -19,6 +19,8 @@ $ yarn add sendchamp-sdk
 
 ## Usage
 The package needs to be configured with your business public key (test/live) and your development mode (test/live).
+<br/><br/>
+NB: Using this package with typescript you need to set `esModuleInterop` to `true` in your tsconfig.json file. [See related issue](https://github.com/fuadop/sendchamp-sdk/issues/6): https://github.com/fuadop/sendchamp-sdk/issues/6
 
 ```javascript
 import Sendchamp from 'sendchamp-sdk';
