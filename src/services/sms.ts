@@ -9,7 +9,7 @@ import {
 class SMS {
   static axiosInstance: AxiosInstance;
 
-  send = async (config: SendSMSConfig): Promise<unknown> => {
+  send = async (config: SendSMSConfig): Promise<SendSMSResponse> => {
     try {
       const response: AxiosResponse<unknown> = await SMS.axiosInstance({
         url: endpoints.SEND_SMS,
@@ -20,25 +20,25 @@ class SMS {
       return response.data as SendSMSResponse;
     } catch (error) {
       const { response } = (error as AxiosError);
-      return response!.data as unknown;
+      return response!.data as SendSMSResponse;
     }
   };
 
-  getStatus = async (sms_message_id: string): Promise<unknown> => {
+  getStatus = async (sms_message_id: string): Promise<SendSMSResponse> => {
     try {
       const response: AxiosResponse<unknown> = await SMS.axiosInstance({
         url: endpoints.getReport(sms_message_id),
         method: 'GET',
       });
 
-      return response.data;
+      return response.data as SendSMSResponse;
     } catch (error) {
       const { response } = (error as AxiosError);
-      return response!.data as unknown;
+      return response!.data as SendSMSResponse;
     }
   };
 
-  registerSender = async (config: RegisterSenderConfig): Promise<unknown> => {
+  registerSender = async (config: RegisterSenderConfig): Promise<SendSMSResponse> => {
     try {
       const response: AxiosResponse<unknown> = await SMS.axiosInstance({
         url: endpoints.REGISTER_SENDER,
@@ -46,10 +46,10 @@ class SMS {
         data: config,
       });
 
-      return response.data;
+      return response.data as SendSMSResponse;
     } catch (error) {
       const { response } = (error as AxiosError);
-      return response!.data as unknown;
+      return response!.data as SendSMSResponse;
     }
   };
 }

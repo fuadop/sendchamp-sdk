@@ -2,125 +2,124 @@ import { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 import endpoints from '../constants/endpoints';
 import {
   SendWHATSAPPAudioConfig,
-  SendWHATSAPPDocumentConfig,
-  SendWHATSAPPImageConfig,
   SendWHATSAPPLocationConfig,
   SendWHATSAPPTemplateConfig,
   SendWHATSAPPTextConfig,
   SendWHATSAPPVideoConfig,
+  SendWHATSAPPResponse,
 } from '../constants/interfaces';
 
 class WHATSAPP {
   static axiosInstance: AxiosInstance;
 
-  sendTemplate = async (config: SendWHATSAPPTemplateConfig): Promise<unknown> => {
+  sendTemplate = async (config: SendWHATSAPPTemplateConfig): Promise<SendWHATSAPPResponse> => {
     try {
-      const response: AxiosResponse<unknown> = await WHATSAPP.axiosInstance({
-        url: endpoints.SEND_WHATSAPP_TEMPLATE,
-        method: 'POST',
-        data: config,
-      });
-
-      return response.data;
-    } catch (error) {
-      const { response } = (error as AxiosError);
-      return response!.data as unknown;
-    }
-  };
-
-  sendText = async (config: SendWHATSAPPTextConfig): Promise<unknown> => {
-    try {
-      config.type = 'text';
       const response: AxiosResponse<unknown> = await WHATSAPP.axiosInstance({
         url: endpoints.SEND_WHATSAPP,
         method: 'POST',
-        data: config,
+        data: {
+          ...config,
+          custom_data: {
+            body: config.meta_data,
+          },
+          type: 'template',
+        },
       });
 
-      return response.data;
+      return response.data as SendWHATSAPPResponse;
     } catch (error) {
       const { response } = (error as AxiosError);
-      return response!.data as unknown;
+      return response!.data as SendWHATSAPPResponse;
     }
   };
 
-  sendImage = async (config: SendWHATSAPPImageConfig): Promise<unknown> => {
+  sendText = async (config: SendWHATSAPPTextConfig): Promise<SendWHATSAPPResponse> => {
     try {
-      config.type = 'image';
       const response: AxiosResponse<unknown> = await WHATSAPP.axiosInstance({
         url: endpoints.SEND_WHATSAPP,
         method: 'POST',
-        data: config,
+        data: {
+          ...config,
+          type: 'text',
+        },
       });
 
-      return response.data;
+      return response.data as SendWHATSAPPResponse;
     } catch (error) {
       const { response } = (error as AxiosError);
-      return response!.data as unknown;
+      return response!.data as SendWHATSAPPResponse;
     }
   };
 
-  sendVideo = async (config: SendWHATSAPPVideoConfig): Promise<unknown> => {
+  sendVideo = async (config: SendWHATSAPPVideoConfig): Promise<SendWHATSAPPResponse> => {
     try {
-      config.type = 'video';
       const response: AxiosResponse<unknown> = await WHATSAPP.axiosInstance({
         url: endpoints.SEND_WHATSAPP,
         method: 'POST',
-        data: config,
+        data: {
+          ...config,
+          type: 'video',
+        },
       });
 
-      return response.data;
+      return response.data as SendWHATSAPPResponse;
     } catch (error) {
       const { response } = (error as AxiosError);
-      return response!.data as unknown;
+      return response!.data as SendWHATSAPPResponse;
     }
   };
 
-  sendAudio = async (config: SendWHATSAPPAudioConfig): Promise<unknown> => {
+  sendSticker = async (config: SendWHATSAPPVideoConfig): Promise<SendWHATSAPPResponse> => {
     try {
-      config.type = 'audio';
       const response: AxiosResponse<unknown> = await WHATSAPP.axiosInstance({
         url: endpoints.SEND_WHATSAPP,
         method: 'POST',
-        data: config,
+        data: {
+          ...config,
+          type: 'sticker',
+        },
       });
 
-      return response.data;
+      return response.data as SendWHATSAPPResponse;
     } catch (error) {
       const { response } = (error as AxiosError);
-      return response!.data as unknown;
+      return response!.data as SendWHATSAPPResponse;
     }
   };
 
-  sendDocument = async (config: SendWHATSAPPDocumentConfig): Promise<unknown> => {
+  sendAudio = async (config: SendWHATSAPPAudioConfig): Promise<SendWHATSAPPResponse> => {
     try {
-      config.type = 'document';
       const response: AxiosResponse<unknown> = await WHATSAPP.axiosInstance({
         url: endpoints.SEND_WHATSAPP,
         method: 'POST',
-        data: config,
+        data: {
+          ...config,
+          type: 'audio',
+        },
       });
 
-      return response.data;
+      return response.data as SendWHATSAPPResponse;
     } catch (error) {
       const { response } = (error as AxiosError);
-      return response!.data as unknown;
+      return response!.data as SendWHATSAPPResponse;
     }
   };
 
-  sendLocation = async (config: SendWHATSAPPLocationConfig): Promise<unknown> => {
+  sendLocation = async (config: SendWHATSAPPLocationConfig): Promise<SendWHATSAPPResponse> => {
     try {
-      config.type = 'location';
       const response: AxiosResponse<unknown> = await WHATSAPP.axiosInstance({
         url: endpoints.SEND_WHATSAPP,
         method: 'POST',
-        data: config,
+        data: {
+          ...config,
+          type: 'location',
+        },
       });
 
-      return response.data;
+      return response.data as SendWHATSAPPResponse;
     } catch (error) {
       const { response } = (error as AxiosError);
-      return response!.data as unknown;
+      return response!.data as SendWHATSAPPResponse;
     }
   };
 }
