@@ -13,7 +13,6 @@ export interface SendchampEndpoints {
   SEND_VERIFICATION_OTP: string,
   VERIFY_VERIFICATION_OTP: string,
   SEND_WHATSAPP: string,
-  SEND_WHATSAPP_TEMPLATE: string,
 }
 
 export interface SendchampBaseURLS {
@@ -30,8 +29,9 @@ export interface SendSMSConfig {
 
 export interface SendVOICEConfig {
   message: string,
-  customer_mobile_number: string,
-  sender_name: string,
+  customer_mobile_number: string[],
+  repeat: number,
+  type: 'outgoing'
 }
 
 export interface SendVERIFICATIONOTPConfig {
@@ -47,11 +47,11 @@ export interface SendVERIFICATIONOTPConfig {
 
 export interface VerifyVERIFICATIONOTPConfig {
   verification_reference: string,
-  verification_otp: string,
+  verification_code: string,
 }
 
 export interface RegisterSenderConfig {
-  sender_name: string,
+  name: string,
   use_case: 'transactional' | 'marketing' | 'transaction_marketing',
   sample: string,
 }
@@ -60,55 +60,31 @@ export interface SendWHATSAPPTemplateConfig {
   sender: string,
   recipient: string,
   template_code: string,
-  message: string,
+  meta_data: { [x: string]: string }
 }
 
 export interface SendWHATSAPPTextConfig {
   recipient: string,
   sender: string,
-  type?: 'text',
   message: string,
-}
-
-export interface SendWHATSAPPImageConfig {
-  recipient: string,
-  from: string,
-  type?: 'image',
-  link: string,
-  caption: string,
 }
 
 export interface SendWHATSAPPVideoConfig {
   recipient: string,
-  from: string,
-  type?: 'video',
+  sender: string,
   link: string,
-  caption: string,
 }
 
 export interface SendWHATSAPPAudioConfig {
   recipient: string,
-  from: string,
-  type?: 'audio',
+  sender: string,
   link: string,
-}
-
-export interface SendWHATSAPPDocumentConfig {
-  recipient: string,
-  from: string,
-  type?: 'document',
-  link: string,
-  caption: string,
+  message: string
 }
 
 export interface SendWHATSAPPLocationConfig {
   recipient: string,
-  from: string,
-  type?: 'location',
-  location: SendLocationBody,
-}
-
-interface SendLocationBody {
+  sender: string,
   longitude: number,
   latitude: number,
   name: string,
@@ -117,48 +93,77 @@ interface SendLocationBody {
 
 export interface SendSMSResponse {
   message: string,
+  code: string,
   status: SendchampStatus,
   data: SMSResponseData,
 }
 
 export interface SendVOICEResponse {
   message: string,
+  code: string,
   data: VOICEResponseData,
   status: SendchampStatus,
 }
 
 export interface SendVERIFICATIONOTPResponse {
   message: string,
+  code: string,
   status: SendchampStatus,
   data: SendVERIFICATIONOTPResponseData,
 }
 
 export interface VerifyVERIFICATIONOTPResponse {
   message: string,
+  code: string,
   status: SendchampStatus,
   data: VerifyVERIFICATIONOTPResponseData,
+}
+
+export interface SendWHATSAPPResponse {
+  message: string,
+  code: string,
+  status: SendchampStatus,
+  data: SendWhatsappResponseData,
+}
+
+interface SendWhatsappResponseData {
+  provider_reference: string,
+  provider_message: string,
+  provider_status: string
 }
 
 interface SMSResponseData {
   status: string,
   business: string,
-  message_references: Array<string>,
+  id: string,
+  uid?: string,
+  business_uid?: string,
+  name?: string,
+  phone_number?: string,
+  amount: string,
+  reference: string,
+  message_references?: Array<string>,
+  delivered_at?: string
+  sent_at?: string
 }
 
 interface VOICEResponseData {
   phone_number: string,
-  conversation_id: string,
-  transaction_id: string,
+  id: string,
   status: string,
+  reference: string,
 }
 
 interface SendVERIFICATIONOTPResponseData {
-  phone_number?: string,
-  email?: string,
-  conversation_id: string,
-  transaction_id: string,
+  business_uid: string,
+  reference: string,
+  channel: {
+    id: number,
+    name: string,
+    is_active: boolean
+  },
+  token?: string,
   status: string,
-  verification_reference: string,
 }
 
 interface VerifyVERIFICATIONOTPResponseData {

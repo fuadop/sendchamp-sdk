@@ -12,12 +12,11 @@ const endpoints: SendchampEndpoints = Object.freeze({
   SEND_SMS: 'sms/send',
   SEND_VOICE: 'voice/send',
   getReport: (sms_message_id: string): string =>
-    `sms/${sms_message_id}/report`,
-  REGISTER_SENDER: 'sms/sender/create',
+    `sms/status/${sms_message_id}`,
+  REGISTER_SENDER: 'sms/create-sender-id',
   SEND_VERIFICATION_OTP: 'verification/create',
   VERIFY_VERIFICATION_OTP: 'verification/confirm',
   SEND_WHATSAPP: 'whatsapp/message/send',
-  SEND_WHATSAPP_TEMPLATE: 'whatsapp/template/send',
 });
 
 export default endpoints;

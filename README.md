@@ -67,7 +67,6 @@ After initialization, you can get instances of offered services as follows:
 - SMS Service : ```sendchamp.SMS```
 - Whatsapp Service : ```sendchamp.WHATSAPP```
 - Voice Service : ```sendchamp.VOICE```
-- Email Service: ```sendchamp.EMAIL```
 - VERIFICATION Service: ```sendchamp.VERIFICATION```
 
 ## Services
@@ -79,7 +78,7 @@ All phone numbers are international format (without the plus symbol). e.g <mark>
     const sms = sendchamp.SMS;
 ```
 
-- ```sms.send({to, message, sender_name, route})```: API for sending SMS.
+- ```sms.send({to, message, sender_name, route})```: API for sending SMS. Refer to sms test file([__tests__/sms.spec.ts](__tests__/sms.spec.ts)) to see usage.
   
   - ```to``` : This represents the destination phone number. The phone number(s) must be in the international format (Example: 23490126727). You can also send to multiple numbers. To do that put numbers in an array (Example: [ '234somenumber', '234anothenumber' ]). <br/><mark>REQUIRED</mark>
   
@@ -93,9 +92,9 @@ All phone numbers are international format (without the plus symbol). e.g <mark>
 
   - ```sms_message_id``` : ID of the SMS that was sent.  <br/><mark>REQUIRED</mark>
 
-- ```sms.registerSender({sender_name, use_case, sample})```: API to register Sender ID for sending SMS.
+- ```sms.registerSender({name, use_case, sample})```: API to register Sender ID for sending SMS.
 
-  - ```sender_name```: Represents the sender of the message. <br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+  - ```name```: Represents the sender of the message. <br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
   - ```use_case```: You should pass either of the following: <b>Transactional</b>, <b>Marketing</b>, or <b>Transactional & Marketing</b>. <br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
@@ -106,11 +105,15 @@ All phone numbers are international format (without the plus symbol). e.g <mark>
     const voice = sendchamp.VOICE;
 ```
 
-- ```voice.send({message, customer_mobile_number})```: This method allows you to send a text-to-speech voice call.
+- ```voice.send({message, customer_mobile_number, type, repeat})```: This method allows you to send a text-to-speech voice call. Refer to the voice test file ([__tests__/voice.spec.ts](__tests__/voice.spec.ts)) to see usage.
 
   - ```message```: The text message you to send with voice.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
-  - ```customer_mobile_number```: The number represents the destination phone number. The number must be in international format (E.g. <b>2348012345678</b>) <br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+  - ```customer_mobile_number```: The number represents the destination phone number. The number must be in international format (E.g. <b>2348012345678</b>) <br/> <mark>string[]</mark> <mark>REQUIRED</mark>
+
+  - ```type```: The voice type, Only one type exists currently which is "outgoing".<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```repeat```: The amount of times the message should be repeated.<br/> <mark>INTEGER</mark> <mark>REQUIRED</mark>
 
 
 ### VERIFICATION Service
@@ -136,18 +139,19 @@ All phone numbers are international format (without the plus symbol). e.g <mark>
 
   - ```meta_data```: To pass additional information as an object.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
-- ```verification.verifyOTP({verification_reference, verification_otp})```: This method is used to confirm the OTP that was sent to your customer.
+- ```verification.verifyOTP({verification_reference, verification_code})```: This method is used to confirm the OTP that was sent to your customer.
 
   - ```verification_reference```: The unique reference that was returned as response when the OTP was created.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
-  - ```verification_otp```: The OTP that was sent to the customer.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+  - ```verification_code```: The OTP that was sent to the customer.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
 ### WHATSAPP Service
 ```javascript
     const whatsapp = sendchamp.WHATSAPP;
 ```
+Refer to the whatsapp test file ([__tests__/whatsapp.spec.ts](__tests__/whatsapp.spec.ts)) for usage.
 
-- ```whatsapp.sendTemplate({sender, recipient, template_code, message})```: Send highly structured messages to your customers based on approved template.
+- ```whatsapp.sendTemplate({sender, recipient, template_code, meta_data})```: Send highly structured messages to your customers based on approved template.
 
   - ```sender```: Your approved Whatsapp number on Sendchamp. You can use our phone number if you have not registered a number <b>2347067959173</b>.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
@@ -155,7 +159,7 @@ All phone numbers are international format (without the plus symbol). e.g <mark>
 
   - ```template_code```: You can find this on the template page under Whatsapp Channel of your Sendchamp dashboard.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
-  - ```message```: This is the message based on the template approved on Sendchamp Dashboard.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+  - ```meta_data```: This is the template custom data.<br/> <mark>OBJECT</mark> <mark>REQUIRED</mark>
 
 - ```whatsapp.sendText({sender, recipient, message})```: Utilize this method to send text messages via WhatsApp.
 
@@ -165,59 +169,46 @@ All phone numbers are international format (without the plus symbol). e.g <mark>
 
   - ```message```: message to customer.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
-- ```whatsapp.sendImage({from, recipient, link, caption})```: Utilize this method to send images via WhatsApp.
+- ```whatsapp.sendVideo({sender, recipient, link })```: Utilize this method to send videos via WhatsApp.
 
-  - ```from```: This will be the activated Whatsapp phone number E.g 234810000000.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
-
-  - ```recipient```: This will be the phone number of the customer E.g 234811111111.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
-
-  - ```link```: This is the URL to the image resource.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
-
-  - ```caption```: This is the caption to be dispalyed under the image in the chat.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
-
-- ```whatsapp.sendVideo({from, recipient, link, caption})```: Utilize this method to send videos via WhatsApp.
-
-  - ```from```: This will be the activated Whatsapp phone number E.g 234810000000.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+  - ```sender```: This will be the activated Whatsapp phone number E.g 234810000000.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
   - ```recipient```: This will be the phone number of the customer E.g 234811111111.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
   - ```link```: This is the URL to the video resource.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
-  - ```caption```: This is the caption to be dispalyed under the video in the chat.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+- ```whatsapp.sendAudio({sender, recipient, link, message})```: Utilize this method to send audio via WhatsApp.
 
-- ```whatsapp.sendAudio({from, recipient, link})```: Utilize this method to send audio via WhatsApp.
-
-  - ```from```: This will be the activated Whatsapp phone number E.g 234810000000.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+  - ```sender```: This will be the activated Whatsapp phone number E.g 234810000000.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
   - ```recipient```: This will be the phone number of the customer E.g 234811111111.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
   - ```link```: This is the URL to the audio resource.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
-- ```whatsapp.sendDocument({from, recipient, link, caption})```: Utilize this method to send documents via WhatsApp.
+  - ```message```: This is the caption to be displayed under the audio in the chat.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
-  - ```from```: This will be the activated Whatsapp phone number E.g 234810000000.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+- ```whatsapp.sendLocation({sender, recipient, name, address, latitude, longitude})```: Utilize this method to send locations via WhatsApp.
 
-  - ```recipient```: This will be the phone number of the customer E.g 234811111111.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
-
-  - ```link```: This is the URL to the document resource.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
-
-  - ```caption```: This is the caption to be dispalyed under the document in the chat.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
-
-- ```whatsapp.sendLocation({from, recipient, location})```: Utilize this method to send locations via WhatsApp.
-
-  - ```from```: This will be the activated Whatsapp phone number E.g 234810000000.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+  - ```sender```: This will be the activated Whatsapp phone number E.g 234810000000.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
   - ```recipient```: This will be the phone number of the customer E.g 234811111111.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
-  - ```location```: An object that describes the location:
+  - ```longitude```: The longitude of the location E.g <b>-46.662787</b>.<br/> <mark>NUMBER</mark> <mark>REQUIRED</mark>
 
-    - ```longitude```: The longitude of the location E.g <b>-46.662787</b>.<br/> <mark>NUMBER</mark> <mark>REQUIRED</mark>
+  - ```latitude```: The latitude of the location E.g <b>-23.55361</b>.<br/> <mark>NUMBER</mark> <mark>REQUIRED</mark>
 
-    - ```latitude```: The latitude of the location E.g <b>-23.55361</b>.<br/> <mark>NUMBER</mark> <mark>REQUIRED</mark>
+  - ```name```: The name of the location E.g <b>Robbu Brazil</b>. <br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
-    - ```name```: The name of the location E.g <b>Robbu Brazil</b>. <br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+  - ```address```: The address of the location E.g <b>Av. Angélica, 2530 - Bela Vista, São Paulo - SP, 01228-200</b>. <br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
-    - ```address```: The address of the location E.g <b>Av. Angélica, 2530 - Bela Vista, São Paulo - SP, 01228-200</b>. <br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+- ```whatsapp.sendSticker({sender, recipient, link })```: Utilize this method to send stickers via WhatsApp.
+
+  - ```sender```: This will be the activated Whatsapp phone number E.g 234810000000.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```recipient```: This will be the phone number of the customer E.g 234811111111.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - ```link```: This is the URL to the video resource.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
 
 ## Contributing
 PRs are greatly appreciated, help us build this hugely needed tool so anyone else can easily integrate sendchamp into their JavaScript based projects and applications.
