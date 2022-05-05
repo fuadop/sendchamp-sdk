@@ -1,5 +1,8 @@
 # Sendchamp Node.js SDK
 The wrapper provides convinient access to the Sendchamp api from applications written in Node.js.
+<br/>
+<br/>
+[![NPM](https://nodei.co/npm/sendchamp-sdk.png?compact=true)](https://npmjs.com/package/sendchamp-sdk/)
 
 ## Documentation
 Take a look at the [API docs here](https://developers.sendchamp.com).
