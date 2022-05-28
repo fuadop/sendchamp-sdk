@@ -6,6 +6,7 @@ import {
 const baseUrl: SendchampBaseURLS = Object.freeze({
   LIVE: 'https://api.sendchamp.com/api/v1/',
   TEST: 'https://sandbox-api.sendchamp.com/api/v1/',
+  'LOCAL-SIMULATOR': 'http://localhost:2920/api/v1/',
 });
 
 const endpoints: SendchampEndpoints = Object.freeze({
