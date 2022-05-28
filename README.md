@@ -124,7 +124,7 @@ All phone numbers are international format (without the plus symbol). e.g <mark>
     const verification = sendchamp.VERIFICATION;
 ```
 
-- ```verification.sendOTP({channel, sender, token_type, token_length, expiration_time, customer_email, customer_mobile_number, meta_data})```: This method is used to send Verification OTP (One Time Password) to your customer contact address.
+- ```verification.sendOTP({channel, sender, token_type, token_length, expiration_time, customer_email_address, customer_mobile_number, meta_data})```: This method is used to send Verification OTP (One Time Password) to your customer contact address.
 
   - ```channel```: <b>VOICE</b>, <b>SMS</b>, <b>WHATSAPP</b> or <b>EMAIL</b>.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
@@ -136,7 +136,7 @@ All phone numbers are international format (without the plus symbol). e.g <mark>
 
   - ```expiration_time```: How long you want to the to be active for in minutes. (E.g 10 means 10 minutes ).<br/> <mark>INTEGER</mark> <mark>REQUIRED</mark>
 
-  - ```customer_email```: The email address of your customer. It's required if you're using Email Channel.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+  - ```customer_email_address```: The email address of your customer. It's required if you're using Email Channel.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
   - ```customer_mobile_number```: The phone number of your customer. It must be in international format (E.g 2348012345678). It is required if you're using the SMS or Voice Channel.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
