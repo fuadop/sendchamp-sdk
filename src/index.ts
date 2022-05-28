@@ -22,7 +22,7 @@ class Sendchamp {
   constructor(config: SendchampConstructor) {
     const { publicKey, mode } = config;
     this.axiosInstance = axios.create({
-      baseURL: baseUrl[(mode || 'live').toUpperCase()] as string,
+      baseURL: baseUrl[(mode || 'live').toUpperCase()],
       headers: {
         Accept: 'application/json',
         Authorization: `Bearer ${publicKey}`,
