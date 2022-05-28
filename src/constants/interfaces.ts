@@ -15,10 +15,9 @@ export interface SendchampEndpoints {
   SEND_WHATSAPP: string,
 }
 
-export interface SendchampBaseURLS {
-  LIVE: string,
-  TEST: string,
-}
+export type SendchampBaseURLS = {
+  [x: string]: string
+};
 
 export interface SendSMSConfig {
   route?: 'non_dnd' | 'dnd' | 'international',
