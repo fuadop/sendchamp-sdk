@@ -39,7 +39,7 @@ export interface SendVERIFICATIONOTPConfig {
   token_type: 'numeric' | 'alphanumeric',
   token_length: number,
   expiration_time: number, // In minutes
-  customer_email?: string,
+  customer_email_address?: string,
   customer_mobile_number?: string,
   meta_data?: Record<string | number, unknown>,
 }
