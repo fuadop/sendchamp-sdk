@@ -1,0 +1,33 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "sadiqful",
+      "name": "Aliyu Abubakar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39303081?v=4",
+      "profile": "https://github.com/sadiqful",
+      "contributions": [
+        "blog",
+        "business",
+        "content",
+        "financial",
+        "ideas",
+        "mentoring",
+        "platform",
+        "question",
+        "tutorial",
+        "talk"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "sendchamp-sdk",
+  "projectOwner": "fuadop",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
