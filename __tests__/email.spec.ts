@@ -22,14 +22,13 @@ describe("EMAIL", () => {
   test("email.send()", async () => {
     const res = await email.send({
       subject: "EMAIL TEST",
-      to: [{ email: mail, name: "" }],
-      from: [{ email: domainEmail, name: "" }],
+      to: [{ email: mail, name: "Bored" }],
+      from: { email: domainEmail, name: "More Bored" },
       message_body: {
         type: "text/html",
         value: "This is the contents of a test", // plain text or html
       },
     });
-
     expect(res.status).toBe("success");
     expect(res.code).not.toBe(200);
   });

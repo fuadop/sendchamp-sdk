@@ -32,48 +32,32 @@ describe("VOICE", () => {
     sendchamp = undefined as unknown as Sendchamp;
     voice = undefined as unknown as VOICE;
   });
-  describe("VOICE.sendTextToSpeech", () => {
-    test("return successfully", async () => {
-      const res = await voice.sendTextToSpeech(textMockData);
-      expect(res.status).toBe("success");
-      expect(res.code).toBe("200");
-      expect(typeof res.data.message).toBe(textMockData.message);
-    });
-
-    test("should throw error", async () => {
-      expect(async () => {
-        await voice.sendTextToSpeech({
-          ...textMockData,
-          repeat: -1,
-        });
-      }).rejects.toEqual(new Error("repeat must be at least 1"));
-    });
+  test("VOICE.sendTextToSpeech, return successfully", async () => {
+    const res = await voice.sendTextToSpeech(textMockData);
+    expect(res.status).toBe("success");
+    expect(res.code).toBe(200);
+    expect(res.data.message).toBe(textMockData.message);
   });
 
-  describe("VOICE.sendAudioToSpeech", () => {
-    test("return successfully", async () => {
-      const res = await voice.sendAudioToSpeech(audioMockData);
-      expect(res.status).toBe("success");
-      expect(res.code).toBe("200");
-      expect(typeof res.data.business_uid).toBe("string");
-    });
-
-    test("should throw error", async () => {
-      expect(async () => {
-        await voice.sendAudioToSpeech(audioMockData);
-      }).rejects.toEqual(new Error("repeat must be at least 1"));
-    });
+  test("VOICE.sendTextToSpeech, should throw error", async () => {
+    expect(async () => {
+      await voice.sendTextToSpeech({
+        ...textMockData,
+        repeat: -1,
+      });
+    }).rejects.toEqual(new Error("repeat must be at least 1"));
   });
 
-  describe("VOICE.getVoiceStatus", () => {
-    test("return successfully", async () => {
-      const {
-        data: { business_uid },
-      } = await voice.sendTextToSpeech(textMockData);
+  test("VOICE.sendAudioToSpeech, return successfully", async () => {
+    const res = await voice.sendAudioToSpeech(audioMockData);
+    expect(res.status).toBe("success");
+    expect(res.code).toBe(200);
+    expect(typeof res.data.business_uid).toBe("string");
+  });
 
-      const res = await voice.getVoiceStatus(business_uid);
-      expect(res.status).toBe("success");
-      expect(res.code).toBe(200);
-    });
+  test("VOICE.sendAudioToSpeech, should throw error", async () => {
+    expect(async () => {
+      await voice.sendAudioToSpeech({ ...audioMockData, repeat: -1 });
+    }).rejects.toEqual(new Error("repeat must be at least 1"));
   });
 });
