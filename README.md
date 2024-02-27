@@ -82,14 +82,16 @@ const sendchamp = new Sendchamp(options);
 After initialization, you can get instances of offered services as follows:
 
 - SMS Service : `sendchamp.SMS`
-- Whatsapp Service : `sendchamp.WHATSAPP`
-- Voice Service : `sendchamp.VOICE`
+- CALL Service: `sendchamp.CALL`
+- EMAIL Service: `sendchamp.EMAIL`
+- WHATSAPP Service : `sendchamp.WHATSAPP`
+- VOICE Service : `sendchamp.VOICE`
 - VERIFICATION Service: `sendchamp.VERIFICATION`
 
 ## Services
 
 All methods are asynchronous.<br/>
-All phone numbers are international format (without the plus symbol). e.g <mark>2348153207998</mark>.
+All phone numbers are international format (without the plus symbol). e.g <mark>2348123456789</mark>.
 
 ### SMS Service
 
