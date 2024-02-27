@@ -1,18 +1,22 @@
-import axios, { AxiosInstance } from "axios";
-import { SendchampConstructor } from "./constants/interfaces";
-import { baseUrl } from "./constants/endpoints";
-import { SMS, VOICE, VERIFICATION, WHATSAPP } from "./services";
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
+import {
+  NUMBERINSIGHTConfig,
+  NUMBERINSIGHTResponse,
+  SendchampConstructor,
+  WALLETBALANCEResponse,
+} from "./constants/interfaces";
+import endpoints, { baseUrl } from "./constants/endpoints";
+import { SMS, VOICE, VERIFICATION, WHATSAPP, CALL, EMAIL } from "./services";
 
 class Sendchamp {
   private axiosInstance: AxiosInstance;
 
   public SMS: SMS = new SMS();
-
+  public CALL: CALL = new CALL();
+  public EMAIL: EMAIL = new EMAIL();
   public VOICE: VOICE = new VOICE();
-
-  public VERIFICATION: VERIFICATION = new VERIFICATION();
-
   public WHATSAPP: WHATSAPP = new WHATSAPP();
+  public VERIFICATION: VERIFICATION = new VERIFICATION();
 
   constructor(config: SendchampConstructor) {
     const { publicKey, mode } = config;
@@ -27,10 +31,43 @@ class Sendchamp {
 
     // Initialize axios instance of subclasses
     SMS.axiosInstance = this.axiosInstance;
+    CALL.axiosInstance = this.axiosInstance;
+    EMAIL.axiosInstance = this.axiosInstance;
     VOICE.axiosInstance = this.axiosInstance;
-    VERIFICATION.axiosInstance = this.axiosInstance;
     WHATSAPP.axiosInstance = this.axiosInstance;
+    VERIFICATION.axiosInstance = this.axiosInstance;
+  }
+
+  async getWalletBalance(): Promise<WALLETBALANCEResponse> {
+    try {
+      const response: AxiosResponse<unknown> = await this.axiosInstance({
+        url: endpoints.WALLET_BALANCE,
+        method: "POST",
+      });
+
+      return response.data as WALLETBALANCEResponse;
+    } catch (error) {
+      const { response } = error as AxiosError;
+      return response!.data as WALLETBALANCEResponse;
+    }
+  }
+
+  async getNumberInsight(
+    config: NUMBERINSIGHTConfig,
+  ): Promise<NUMBERINSIGHTResponse> {
+    try {
+      const response: AxiosResponse<unknown> = await this.axiosInstance({
+        url: endpoints.NUMBER_INSIGHT,
+        method: "POST",
+        data: config,
+      });
+
+      return response.data as NUMBERINSIGHTResponse;
+    } catch (error) {
+      const { response } = error as AxiosError;
+      return response!.data as NUMBERINSIGHTResponse;
+    }
   }
 }
 
-export = Sendchamp;
+export default Sendchamp;

@@ -8,34 +8,36 @@ const baseUrl: SendchampBaseURLS = Object.freeze({
 
 const endpoints: SendchampEndpoints = Object.freeze({
   // SMS
-  SEND_SMS: "sms/send",
+  SEND_SMS: "sms/send", // --> Checked
+  REGISTER_SENDER: "sms/create-sender-id", // --> Checked
   getSMSReport: (sms_message_id: string): string =>
-    `sms/status/${sms_message_id}`,
+    `sms/status/${sms_message_id}`, // -- Checked
   getBulkSMSReport: (bulk_sms_message_id: string): string =>
-    `sms/bulk-sms-status/${bulk_sms_message_id}`,
+    `sms/bulk-sms-status/${bulk_sms_message_id}`, // -- Checked
 
   // VOICE
-  SEND_VOICE: "voice/send",
-  CREATE_VOICE_CALL: "number/call/create",
-  LIST_VOICE_CALLS: "number/call/list",
-  getVoiceReport: (voice_id: string): string => `voice/status/${voice_id}`,
-  getCallReport: (call_id: string) => `number/call/${call_id}`,
+  SEND_VOICE: "voice/send", // --> Checked
+  getVoiceReport: (voice_id: string): string => `voice/status/${voice_id}`, // --> Checked
 
   // WHATSAPP
   SEND_WHATSAPP: "whatsapp/message/send",
   VERIFY_WHATSAPP: "/whatsapp/validate",
 
+  // CALL
+  getCallReport: (call_id: string) => `number/call/${call_id}`,
+  CREATE_VOICE_CALL: "number/call/create",
+  LIST_VOICE_CALLS: "number/call/list",
+
   // BASE
-  REGISTER_SENDER: "sms/create-sender-id",
-  NUMBER_INSIGHT: "number-insights/check",
-  WALLET_BALANCE: "wallet/wallet_balance",
+  NUMBER_INSIGHT: "number-insights/check", // --> Checked
+  WALLET_BALANCE: "wallet/wallet_balance", // --> Checked
 
   // VERIFICATION
-  SEND_VERIFICATION_OTP: "verification/create",
-  VERIFY_VERIFICATION_OTP: "verification/confirm",
+  SEND_VERIFICATION_OTP: "verification/create", // --> Pass
+  VERIFY_VERIFICATION_OTP: "verification/confirm", // --> Pass
 
   // EMAIL
-  SEND_EMAIL: "email/send",
+  SEND_EMAIL: "email/send", // --> Checked
 });
 
 export default endpoints;

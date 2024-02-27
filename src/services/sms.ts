@@ -1,71 +1,74 @@
-import axios from 'axios';
-import endpoints from '../constants/endpoints';
+import { AxiosInstance, AxiosResponse, AxiosError } from "axios";
+import endpoints from "../constants/endpoints";
 import {
   RegisterSenderConfig,
+  RegisterSenderResponse,
   SendSMSConfig,
   SendSMSResponse,
-} from '../constants/interfaces';
+} from "../constants/interfaces";
 
 class SMS {
-  static axiosInstance: axios.AxiosInstance;
+  static axiosInstance: AxiosInstance;
 
-  send = async (config: SendSMSConfig): Promise<SendSMSResponse> => {
+  async send(config: SendSMSConfig): Promise<SendSMSResponse> {
     try {
-      const response: axios.AxiosResponse<unknown> = await SMS.axiosInstance({
+      const response: AxiosResponse<unknown> = await SMS.axiosInstance({
         url: endpoints.SEND_SMS,
-        method: 'POST',
+        method: "POST",
         data: config,
       });
 
       return response.data as SendSMSResponse;
     } catch (error) {
-      const { response } = (error as axios.AxiosError);
+      const { response } = error as AxiosError;
       return response!.data as SendSMSResponse;
     }
-  };
+  }
 
-  getSMSStatus = async (sms_message_id: string): Promise<SendSMSResponse> => {
+  async getSMSStatus(sms_id: string): Promise<SendSMSResponse> {
     try {
-      const response: axios.AxiosResponse<unknown> = await SMS.axiosInstance({
-        url: endpoints.getSMSReport(sms_message_id),
-        method: 'GET',
+      const response: AxiosResponse<unknown> = await SMS.axiosInstance({
+        url: endpoints.getSMSReport(sms_id),
+        method: "GET",
       });
 
       return response.data as SendSMSResponse;
     } catch (error) {
-      const { response } = (error as axios.AxiosError);
+      const { response } = error as AxiosError;
       return response!.data as SendSMSResponse;
     }
-  };
+  }
 
-  getBulkSMSStatus = async (sms_message_id: string): Promise<SendSMSResponse> => {
+  async getBulkSMSStatus(bulk_sms_id: string): Promise<SendSMSResponse> {
     try {
-      const response: axios.AxiosResponse<unknown> = await SMS.axiosInstance({
-        url: endpoints.getBulkSMSReport(sms_message_id),
-        method: 'GET',
+      const response: AxiosResponse<unknown> = await SMS.axiosInstance({
+        url: endpoints.getBulkSMSReport(bulk_sms_id),
+        method: "GET",
       });
 
       return response.data as SendSMSResponse;
     } catch (error) {
-      const { response } = (error as axios.AxiosError);
+      const { response } = error as AxiosError;
       return response!.data as SendSMSResponse;
     }
-  };
+  }
 
-  registerSender = async (config: RegisterSenderConfig): Promise<SendSMSResponse> => {
+  async registerSender(
+    config: RegisterSenderConfig,
+  ): Promise<RegisterSenderResponse> {
     try {
-      const response: axios.AxiosResponse<unknown> = await SMS.axiosInstance({
+      const response: AxiosResponse<unknown> = await SMS.axiosInstance({
         url: endpoints.REGISTER_SENDER,
-        method: 'POST',
+        method: "POST",
         data: config,
       });
 
-      return response.data as SendSMSResponse;
+      return response.data as RegisterSenderResponse;
     } catch (error) {
-      const { response } = (error as axios.AxiosError);
-      return response!.data as SendSMSResponse;
+      const { response } = error as AxiosError;
+      return response!.data as RegisterSenderResponse;
     }
-  };
+  }
 }
 
 export default SMS;

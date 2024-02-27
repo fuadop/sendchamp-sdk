@@ -1,11 +1,6 @@
-import SMS from './sms';
-import WHATSAPP from './whatsapp';
-import VERIFICATION from './verification';
-import VOICE from './voice';
-
-export {
-  SMS,
-  WHATSAPP,
-  VERIFICATION,
-  VOICE,
-};
+export { default as SMS } from "./sms";
+export { default as WHATSAPP } from "./whatsapp";
+export { default as VERIFICATION } from "./verification";
+export { default as VOICE } from "./voice";
+export { default as EMAIL } from "./email";
+export { default as CALL } from "./call";
