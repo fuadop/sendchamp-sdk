@@ -1,12 +1,7 @@
-import axios, { AxiosInstance } from 'axios';
-import { SendchampConstructor } from './constants/interfaces';
-import { baseUrl } from './constants/endpoints';
-import {
-  SMS,
-  VOICE,
-  VERIFICATION,
-  WHATSAPP,
-} from './services';
+import axios, { AxiosInstance } from "axios";
+import { SendchampConstructor } from "./constants/interfaces";
+import { baseUrl } from "./constants/endpoints";
+import { SMS, VOICE, VERIFICATION, WHATSAPP } from "./services";
 
 class Sendchamp {
   private axiosInstance: AxiosInstance;
@@ -22,11 +17,11 @@ class Sendchamp {
   constructor(config: SendchampConstructor) {
     const { publicKey, mode } = config;
     this.axiosInstance = axios.create({
-      baseURL: baseUrl[(mode || 'live').toUpperCase()],
+      baseURL: baseUrl[(mode || "live").toUpperCase()],
       headers: {
-        Accept: 'application/json',
+        Accept: "application/json",
         Authorization: `Bearer ${publicKey}`,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
