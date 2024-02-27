@@ -1,6 +1,6 @@
 import Sendchamp from "../src";
 import { mobile, publicKey, sender_name } from "../src/config";
-import { SendchampMode, SenderUseCase } from "../src/constants/types";
+import { SMSRoute, SendchampMode, SenderUseCase } from "../src/constants/types";
 import { SMS } from "../src/services";
 import random from "randomatic";
 
@@ -29,7 +29,7 @@ describe("SMS", () => {
       message: "test_message_node_sdk",
       sender_name: sender_name,
       to: [mobile],
-      route: "dnd",
+      route: SMSRoute.dnd,
     });
 
     expect(status).toBe("success");
@@ -42,7 +42,7 @@ describe("SMS", () => {
       message: "test_message_node_sdk",
       sender_name: "SDigital",
       to: [mobile],
-      route: "dnd",
+      route: SMSRoute.dnd,
     });
     const message_id = _res.data.id;
 
@@ -57,7 +57,7 @@ describe("SMS", () => {
       message: "test_message_node_sdk",
       sender_name,
       to: [mobile, "08123456789"],
-      route: "dnd",
+      route: SMSRoute.dnd,
     });
 
     expect(res.status).toBe("success");
@@ -70,7 +70,7 @@ describe("SMS", () => {
       message: "test_message_node_sdk",
       sender_name: "SDigital",
       to: [mobile],
-      route: "dnd",
+      route: SMSRoute.dnd,
     });
     const bulk_message_id = _res.data.id;
 
