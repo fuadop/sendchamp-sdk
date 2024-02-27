@@ -1,4 +1,0 @@
-**/*.js
-lib/*
-src/test-setup.ts
-__tests__/*
