@@ -1,4 +1,5 @@
 import Sendchamp from "../src";
+import { publicKey } from "../src/config";
 import { SendchampMode } from "../src/constants/types";
 import { CALL } from "../src/services";
 
@@ -7,7 +8,7 @@ describe("CALL", () => {
   let call: CALL;
   beforeEach(() => {
     sendchamp = new Sendchamp({
-      publicKey: process.env.PUBLIC_KEY!,
+      publicKey,
       mode: SendchampMode.live,
     });
     call = sendchamp.CALL;
@@ -20,18 +21,16 @@ describe("CALL", () => {
 
   test("call.create()", async () => {
     const res = await call.create();
-    console.log({ res });
 
     expect(res.status).toBe("success");
-    expect(res.code).not.toBe(200);
+    expect(res.code).toBe(200);
   });
 
   test("call.listVoiceCalls()", async () => {
     const res = await call.listVoiceCalls();
-    console.log({ res });
 
     expect(res.status).toBe("success");
-    expect(res.code).not.toBe(200);
+    expect(res.code).toBe(200);
   });
 
   test("call.retrieveSingleCall()", async () => {
@@ -41,6 +40,6 @@ describe("CALL", () => {
     const res = await call.retrieveSingleCall(id);
 
     expect(res.status).toBe("success");
-    expect(res.code).not.toBe(200);
+    expect(res.code).toBe(200);
   });
 });
