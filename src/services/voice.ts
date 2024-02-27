@@ -7,9 +7,6 @@ import {
   SendVOICETextToSpeechResponse,
 } from "../constants/interfaces";
 
-type VoiceStatusResponse =
-  | SendVOICEAudioToSpeechResponse
-  | SendVOICETextToSpeechResponse;
 class VOICE {
   static axiosInstance: AxiosInstance;
 
@@ -52,20 +49,6 @@ class VOICE {
     } catch (error) {
       const { response } = error as AxiosError;
       return response!.data as SendVOICEAudioToSpeechResponse;
-    }
-  }
-
-  async getVoiceStatus(voice_uid: string): Promise<VoiceStatusResponse> {
-    try {
-      const response: AxiosResponse<unknown> = await VOICE.axiosInstance({
-        url: endpoints.getVoiceReport(voice_uid),
-        method: "GET",
-      });
-
-      return response.data as VoiceStatusResponse;
-    } catch (error) {
-      const { response } = error as AxiosError;
-      return response!.data as VoiceStatusResponse;
     }
   }
 }

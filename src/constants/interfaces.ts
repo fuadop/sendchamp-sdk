@@ -19,9 +19,6 @@ export interface SendchampEndpoints {
   SEND_SMS: string;
   SEND_EMAIL: string;
   SEND_VOICE: string;
-  getSMSReport: (sms_message_id: string) => string;
-  getBulkSMSReport: (bulk_sms_message_id: string) => string;
-  getVoiceReport: (voice_id: string) => string;
   getCallReport: (call_id: string) => string;
   REGISTER_SENDER: string;
   SEND_VERIFICATION_OTP: string;
@@ -79,7 +76,7 @@ export interface SendVERIFICATIONOTPConfig {
 export interface SendEMAILConfig {
   subject: string;
   to: { email: string; name: string }[];
-  from: { email: string; name: string }[];
+  from: { email: string; name: string };
   message_body: { type: string; value: string };
 }
 
@@ -158,7 +155,7 @@ export interface VerifyWHATSAPPResponse {
   data: VerifyWHATSAPPResponseData;
   errors: any;
   message: string;
-  success: string;
+  status: string;
 }
 
 export interface SendSMSResponse {
@@ -245,11 +242,10 @@ interface SendWhatsappResponseData {
 }
 
 interface SMSResponseData {
-  id: string;
-  phone_number: string;
-  status: string;
-  amount: string;
-  reference: string;
+  total_contacts: number;
+  business_id: string;
+  created_at: string;
+  updated_at: string;
 }
 
 interface RegisterSenderResponseData {

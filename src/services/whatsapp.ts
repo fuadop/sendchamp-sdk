@@ -20,7 +20,7 @@ class WHATSAPP {
   ): Promise<VerifyWHATSAPPResponse> {
     try {
       const response: AxiosResponse<unknown> = await WHATSAPP.axiosInstance({
-        url: endpoints.SEND_WHATSAPP,
+        url: endpoints.VERIFY_WHATSAPP,
         method: "POST",
         data: config,
       });

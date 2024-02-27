@@ -17,35 +17,6 @@ class SMS {
         method: "POST",
         data: config,
       });
-
-      return response.data as SendSMSResponse;
-    } catch (error) {
-      const { response } = error as AxiosError;
-      return response!.data as SendSMSResponse;
-    }
-  }
-
-  async getSMSStatus(sms_id: string): Promise<SendSMSResponse> {
-    try {
-      const response: AxiosResponse<unknown> = await SMS.axiosInstance({
-        url: endpoints.getSMSReport(sms_id),
-        method: "GET",
-      });
-
-      return response.data as SendSMSResponse;
-    } catch (error) {
-      const { response } = error as AxiosError;
-      return response!.data as SendSMSResponse;
-    }
-  }
-
-  async getBulkSMSStatus(bulk_sms_id: string): Promise<SendSMSResponse> {
-    try {
-      const response: AxiosResponse<unknown> = await SMS.axiosInstance({
-        url: endpoints.getBulkSMSReport(bulk_sms_id),
-        method: "GET",
-      });
-
       return response.data as SendSMSResponse;
     } catch (error) {
       const { response } = error as AxiosError;
