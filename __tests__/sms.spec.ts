@@ -54,7 +54,7 @@ describe("SMS", () => {
       message_id = _res.data.id;
     }
 
-    const res = await sms.getStatus(message_id);
+    const res = await sms.getSMSStatus(message_id);
     expect(res.status).toBe("success");
     expect(res.code).toBe("200");
     expect(res.data.id).toMatch(message_id)

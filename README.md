@@ -41,7 +41,7 @@ const sms = sendchamp.SMS;
 
 // Use the service
 const options = {
-  to: ['2348153207998'],
+  to: ['234812345678'],
   message: 'Hello from postman',
   sender_name: 'sendchamp',
   // optional option to set route
