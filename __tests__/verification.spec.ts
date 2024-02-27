@@ -1,42 +1,79 @@
+import Sendchamp from "../src";
+import { mobile, publicKey, sender_name } from "../src/config";
+import { Channel, SendchampMode, TokenType } from "../src/constants/types";
 import { VERIFICATION } from "../src/services";
-import { sendchamp, sender } from "../src/test-setup";
-
-let verification: VERIFICATION;
-beforeEach(() => {
-  verification = sendchamp.VERIFICATION;
-});
-
-afterEach(() => {
-  // @ts-ignore
-  verification = null;
-});
 
 describe("VERIFICATION", () => {
+  let sendchamp: Sendchamp;
+  let verification: VERIFICATION;
+  console.log({ mobile, publicKey });
+  beforeEach(() => {
+    sendchamp = new Sendchamp({
+      publicKey: publicKey,
+      mode: SendchampMode.live,
+    });
+    verification = sendchamp.VERIFICATION;
+  });
+
+  afterEach(() => {
+    sendchamp = undefined as unknown as Sendchamp;
+    verification = undefined as unknown as VERIFICATION;
+  });
+
   test("verification.sendOTP()", async () => {
+    console.log({ mobile, publicKey });
     const res = await verification.sendOTP({
-      channel: "sms",
+      channel: Channel.sms,
       expiration_time: 5,
-      sender,
+      sender: sender_name,
       token_length: 4,
-      token_type: "alphanumeric",
-      customer_mobile_number: "2348153207998",
+      token_type: TokenType.alphanumeric,
+      customer_mobile_number: mobile,
       meta_data: {
         name: "Fuad",
-        class: "__test_class__"
-      }
+        class: "__test_class__",
+        description: "demo",
+      },
+      in_app_token: false,
     });
-
+    console.log({ res });
     expect(res.status).toBe("success");
-    expect(res.code).toBe("200");
+    expect(res.code).toBe(200);
     expect(res.data.business_uid).toBeDefined();
     expect(typeof res.data.reference).toEqual("string");
   });
 
   test("verification.verifyOTP()", async () => {
-    const res = await verification.verifyOTP({
-      verification_code: "abcd",
-      verification_reference: "5d6da94c-d377-4579-a6e8-0a0a37963b37"
+    const {
+      status,
+      code,
+      data: { reference, token },
+    } = await verification.sendOTP({
+      channel: Channel.sms,
+      expiration_time: 5,
+      sender: sender_name,
+      token_length: 4,
+      token_type: TokenType.alphanumeric,
+      customer_mobile_number: mobile,
+      meta_data: {
+        name: "Fuad",
+        class: "__test_class__",
+        description: "demo",
+      },
+      in_app_token: false,
     });
-    expect(res.status).toBeDefined();
+
+    expect(status).toBe("success");
+    expect(code).toBe(200);
+    expect(typeof reference).toEqual("string");
+    const {
+      status: Status,
+      data: { status: verifyStatus },
+    } = await verification.verifyOTP({
+      verification_code: token!,
+      verification_reference: reference,
+    });
+    expect(Status).toBe("success");
+    expect(verifyStatus).toBe("verified");
   });
 });

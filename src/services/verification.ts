@@ -1,45 +1,52 @@
-import axios from 'axios';
+import { AxiosInstance, AxiosError, AxiosResponse } from "axios";
 import {
   SendVERIFICATIONOTPConfig,
   SendVERIFICATIONOTPResponse,
   VerifyVERIFICATIONOTPConfig,
   VerifyVERIFICATIONOTPResponse,
-} from '../constants/interfaces';
-import endpoints from '../constants/endpoints';
+} from "../constants/interfaces";
+import endpoints from "../constants/endpoints";
 
 class VERIFICATION {
-  static axiosInstance: axios.AxiosInstance;
+  static axiosInstance: AxiosInstance;
 
-  sendOTP = async (config: SendVERIFICATIONOTPConfig): Promise<SendVERIFICATIONOTPResponse> => {
+  async sendOTP(
+    config: SendVERIFICATIONOTPConfig,
+  ): Promise<SendVERIFICATIONOTPResponse> {
     try {
-      const response: axios.AxiosResponse<unknown> = await VERIFICATION.axiosInstance({
-        url: endpoints.SEND_VERIFICATION_OTP,
-        method: 'POST',
-        data: config,
-      });
+      const response: AxiosResponse<unknown> = await VERIFICATION.axiosInstance(
+        {
+          url: endpoints.SEND_VERIFICATION_OTP,
+          method: "POST",
+          data: config,
+        },
+      );
 
       return response.data as SendVERIFICATIONOTPResponse;
-    } catch (error) {
-      const { response } = (error as axios.AxiosError);
-      return response!.data as SendVERIFICATIONOTPResponse;
+    } catch (error: any) {
+      const { response } = error as AxiosError;
+      return response?.data as SendVERIFICATIONOTPResponse;
     }
-  };
+  }
 
-  // eslint-disable-next-line max-len
-  verifyOTP = async (config: VerifyVERIFICATIONOTPConfig): Promise<VerifyVERIFICATIONOTPResponse> => {
+  async verifyOTP(
+    config: VerifyVERIFICATIONOTPConfig,
+  ): Promise<VerifyVERIFICATIONOTPResponse> {
     try {
-      const response: axios.AxiosResponse<unknown> = await VERIFICATION.axiosInstance({
-        url: endpoints.VERIFY_VERIFICATION_OTP,
-        method: 'POST',
-        data: config,
-      });
+      const response: AxiosResponse<unknown> = await VERIFICATION.axiosInstance(
+        {
+          url: endpoints.VERIFY_VERIFICATION_OTP,
+          method: "POST",
+          data: config,
+        },
+      );
 
       return response.data as VerifyVERIFICATIONOTPResponse;
     } catch (error) {
-      const { response } = (error as axios.AxiosError);
-      return response!.data as VerifyVERIFICATIONOTPResponse;
+      const { response } = error as AxiosError;
+      return response?.data as VerifyVERIFICATIONOTPResponse;
     }
-  };
+  }
 }
 
 export default VERIFICATION;

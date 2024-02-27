@@ -1,29 +1,24 @@
-import axios from "axios";
-import {
-  SendEMAILConfig,
-  SendVERIFICATIONOTPResponse,
-} from "../constants/interfaces";
+import { AxiosInstance, AxiosResponse, AxiosError } from "axios";
+import { SendEMAILConfig, SendEMAILResponse } from "../constants/interfaces";
 import endpoints from "../constants/endpoints";
 
 class EMAIL {
-  static axiosInstance: axios.AxiosInstance;
+  static axiosInstance: AxiosInstance;
 
-  send = async (
-    config: SendEMAILConfig,
-  ): Promise<SendVERIFICATIONOTPResponse> => {
+  async send(config: SendEMAILConfig): Promise<SendEMAILResponse> {
     try {
-      const response: axios.AxiosResponse = await EMAIL.axiosInstance({
+      const response: AxiosResponse = await EMAIL.axiosInstance({
         url: endpoints.SEND_EMAIL,
         method: "POST",
         data: config,
       });
 
-      return response.data as SendVERIFICATIONOTPResponse;
+      return response.data;
     } catch (error) {
-      const { response } = error as axios.AxiosError;
-      return response!.data as SendVERIFICATIONOTPResponse;
+      const { response } = error as AxiosError;
+      return response!.data as SendEMAILResponse;
     }
-  };
+  }
 }
 
 export default EMAIL;
