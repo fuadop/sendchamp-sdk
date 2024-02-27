@@ -45,3 +45,9 @@ export enum VoiceType {
   "incoming" = "incomming",
   "template" = "template",
 }
+
+export enum SMSRoute {
+  "non_dnd" = "non_dnd",
+  "dnd" = "dnd",
+  "international" = "international",
+}

@@ -1,6 +1,7 @@
 import {
   Channel,
   InsightType,
+  SMSRoute,
   SendchampMode,
   SendchampStatus,
   SenderUseCase,
@@ -38,7 +39,7 @@ export type SendchampBaseURLS = {
 };
 
 export interface SendSMSConfig {
-  route?: "non_dnd" | "dnd" | "international";
+  route: SMSRoute;
   to: string | Array<string>;
   message: string;
   sender_name: string;
