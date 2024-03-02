@@ -70,7 +70,7 @@ Initialize the SDK by doing :
 
 ```javascript
 import Sendchamp from "sendchamp-sdk"; // es6 import
-const Sendchamp = require("sendchamp-sdk"); // commonjs require
+const Sendchamp = require("sendchamp-sdk").default; // commonjs require
 
 const sendchamp = new Sendchamp(options);
 // options is an object of publicKey and mode
