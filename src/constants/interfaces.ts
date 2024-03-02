@@ -1,182 +1,337 @@
-import { SendchampMode, SendchampStatus } from './types';
+import {
+  Channel,
+  InsightType,
+  SMSRoute,
+  SendchampMode,
+  SendchampStatus,
+  SenderUseCase,
+  TokenType,
+  VoiceType,
+  WhatsAppType,
+} from "./types";
 
 export interface SendchampConstructor {
-  publicKey: string,
-  mode?: SendchampMode,
+  publicKey: string;
+  mode?: SendchampMode;
 }
 
 export interface SendchampEndpoints {
-  SEND_SMS: string,
-  SEND_VOICE: string,
-  getReport: (sms_message_id: string) => string,
-  REGISTER_SENDER: string,
-  SEND_VERIFICATION_OTP: string,
-  VERIFY_VERIFICATION_OTP: string,
-  SEND_WHATSAPP: string,
+  SEND_SMS: string;
+  SEND_EMAIL: string;
+  SEND_VOICE: string;
+  getCallReport: (call_id: string) => string;
+  REGISTER_SENDER: string;
+  SEND_VERIFICATION_OTP: string;
+  VERIFY_VERIFICATION_OTP: string;
+  SEND_WHATSAPP: string;
+  VERIFY_WHATSAPP: string;
+  WALLET_BALANCE: string;
+  CREATE_VOICE_CALL: string;
+  LIST_VOICE_CALLS: string;
+  NUMBER_INSIGHT: string;
 }
 
 export type SendchampBaseURLS = {
-  [x: string]: string
+  [x: string]: string;
 };
 
 export interface SendSMSConfig {
-  route?: 'non_dnd' | 'dnd' | 'international',
-  to: string | Array<string>,
-  message: string,
-  sender_name: string,
+  route: SMSRoute;
+  to: string | Array<string>;
+  message: string;
+  sender_name: string;
 }
 
-export interface SendVOICEConfig {
-  message: string,
-  customer_mobile_number: string[],
-  repeat: number,
-  type: 'outgoing'
+export interface SendVOICETextToSpeechConfig {
+  message: string;
+  customer_mobile_number: string[];
+  repeat: number;
+  type: VoiceType;
+}
+
+export interface SendVOICEAudioToSpeechConfig {
+  path: string;
+  customer_mobile_number: string[];
+  repeat: number;
+  type: VoiceType;
+}
+
+export interface VerifyWHATSAPPConfig {
+  phone_number: string;
 }
 
 export interface SendVERIFICATIONOTPConfig {
-  channel: 'sms' | 'email',
-  sender: string,
-  token_type: 'numeric' | 'alphanumeric',
-  token_length: number,
-  expiration_time: number, // In minutes
-  customer_email_address?: string,
-  customer_mobile_number?: string,
-  meta_data?: Record<string | number, unknown>,
+  channel: Channel;
+  sender: string;
+  token_type: TokenType;
+  token_length: number;
+  expiration_time: number; // In minutes
+  customer_email_address?: string;
+  customer_mobile_number?: string;
+  meta_data?: Record<string | number, unknown>;
+  token?: string;
+  in_app_token: boolean;
+}
+
+export interface SendEMAILConfig {
+  subject: string;
+  to: { email: string; name: string }[];
+  from: { email: string; name: string };
+  message_body: { type: string; value: string };
 }
 
 export interface VerifyVERIFICATIONOTPConfig {
-  verification_reference: string,
-  verification_code: string,
+  verification_reference: string;
+  verification_code: string;
 }
 
 export interface RegisterSenderConfig {
-  name: string,
-  use_case: 'transactional' | 'marketing' | 'transaction_marketing',
-  sample: string,
+  name: string;
+  use_case: SenderUseCase;
+  sample: string;
 }
 
 export interface SendWHATSAPPTemplateConfig {
-  sender: string,
-  recipient: string,
-  template_code: string,
-  meta_data: { [x: string]: string }
+  type: WhatsAppType.template;
+  sender: string;
+  recipient: string;
+  template_code: string;
+  custom_data: { [x: string]: string };
 }
 
+export interface SendWHATSAPPStickerConfig {
+  type: WhatsAppType.sticker;
+  recipient: string;
+  sender: string;
+  link: string;
+}
 export interface SendWHATSAPPTextConfig {
-  recipient: string,
-  sender: string,
-  message: string,
+  type: WhatsAppType.text;
+  recipient: string;
+  sender: string;
+  message: string;
 }
 
 export interface SendWHATSAPPVideoConfig {
-  recipient: string,
-  sender: string,
-  link: string,
+  type: WhatsAppType.video;
+  recipient: string;
+  sender: string;
+  link: string;
 }
 
 export interface SendWHATSAPPAudioConfig {
-  recipient: string,
-  sender: string,
-  link: string,
-  message: string
+  type: WhatsAppType.audio;
+  recipient: string;
+  sender: string;
+  link: string;
+  message: string;
 }
 
 export interface SendWHATSAPPLocationConfig {
-  recipient: string,
-  sender: string,
-  longitude: number,
-  latitude: number,
-  name: string,
-  address: string,
+  type: WhatsAppType.location;
+  recipient: string;
+  sender: string;
+  longitude: number;
+  latitude: number;
+  name: string;
+  address: string;
+}
+
+export interface NUMBERINSIGHTConfig {
+  phone_number: string;
+  type: InsightType;
+}
+
+export interface RegisterSenderResponse {
+  message: string;
+  code: number;
+  status: SendchampStatus;
+  data: RegisterSenderResponseData;
+  errors: any;
+}
+
+export interface VerifyWHATSAPPResponse {
+  code: number;
+  data: VerifyWHATSAPPResponseData;
+  errors: any;
+  message: string;
+  status: string;
 }
 
 export interface SendSMSResponse {
-  message: string,
-  code: string,
-  status: SendchampStatus,
-  data: SMSResponseData,
+  message: string;
+  code: number;
+  status: SendchampStatus;
+  data: SMSResponseData;
+  errors: any;
 }
 
-export interface SendVOICEResponse {
-  message: string,
-  code: string,
-  data: VOICEResponseData,
-  status: SendchampStatus,
+export interface SendVOICETextToSpeechResponse {
+  message: string;
+  code: number;
+  data: VOICETextToSpeechResponseData;
+  status: SendchampStatus;
+  errors: any;
+}
+
+export interface SendVOICEAudioToSpeechResponse {
+  message: string;
+  code: number;
+  data: VOICEAudioToSpeechResponseData;
+  status: SendchampStatus;
+  errors: any;
+}
+
+export interface SendCALLResponse {
+  message: string;
+  code: number;
+  data: CALLResponseData;
+  status: SendchampStatus;
 }
 
 export interface SendVERIFICATIONOTPResponse {
-  message: string,
-  code: string,
-  status: SendchampStatus,
-  data: SendVERIFICATIONOTPResponseData,
+  message: string;
+  code: number;
+  status: SendchampStatus;
+  data: SendVERIFICATIONOTPResponseData;
+  errors: any;
 }
 
 export interface VerifyVERIFICATIONOTPResponse {
-  message: string,
-  code: string,
-  status: SendchampStatus,
-  data: VerifyVERIFICATIONOTPResponseData,
+  message: string;
+  code: number;
+  status: SendchampStatus;
+  data: VerifyVERIFICATIONOTPResponseData;
+  errors: any;
 }
 
 export interface SendWHATSAPPResponse {
-  message: string,
-  code: string,
-  status: SendchampStatus,
-  data: SendWhatsappResponseData,
+  message: string;
+  code: number;
+  status: SendchampStatus;
+  data: SendWhatsappResponseData;
+}
+
+export interface SendEMAILResponse {
+  message: string;
+  code: number;
+  status: SendchampStatus;
+  data: SendEMAILResponseData;
+}
+
+export interface WALLETBALANCEResponse {
+  message: string;
+  code: number;
+  status: SendchampStatus;
+  data: WALLETBALANCEData;
+  errors: any;
+}
+
+export interface NUMBERINSIGHTResponse {
+  message: string;
+  code: number;
+  status: SendchampStatus;
+  data: NUMBERINSIGHTData;
+  errors: any;
 }
 
 interface SendWhatsappResponseData {
-  provider_reference: string,
-  provider_message: string,
-  provider_status: string
+  provider_reference: string;
+  provider_message: string;
+  provider_status: string;
 }
 
 interface SMSResponseData {
-  status: string,
-  business: string,
-  id: string,
-  uid?: string,
-  business_uid?: string,
-  name?: string,
-  phone_number?: string,
-  amount: string,
-  reference: string,
-  message_references?: Array<string>,
-  delivered_at?: string
-  sent_at?: string
+  total_contacts: number;
+  business_id: string;
+  created_at: string;
+  updated_at: string;
 }
 
-interface VOICEResponseData {
-  phone_number: string,
-  id: string,
-  status: string,
-  reference: string,
+interface RegisterSenderResponseData {
+  id: number;
+  uid: string;
+  name: string;
+  business_id: string;
+  use_case: string;
+  sample: string;
+  status: string;
+  approved_for_verifcation: boolean;
+  business: {
+    id: number;
+    uuid: string;
+    name: string;
+  };
+  created_at: string;
+  updated_at: string;
+}
+
+interface VOICETextToSpeechResponseData {
+  total_contacts: number;
+  message: string;
+  business_uid: string;
+}
+
+interface VOICEAudioToSpeechResponseData {
+  total_contacts: number;
+  business_uid: string;
 }
 
 interface SendVERIFICATIONOTPResponseData {
-  business_uid: string,
-  reference: string,
+  business_uid: string;
+  reference: string;
   channel: {
-    id: number,
-    name: string,
-    is_active: boolean
-  },
-  token?: string,
-  status: string,
+    id: number;
+    name: string;
+    is_active: boolean;
+  };
+  token?: string;
+  status: string;
 }
 
 interface VerifyVERIFICATIONOTPResponseData {
-  id: string,
-  business_id: string,
-  business_customer_id: string,
-  channel_id: string,
-  verification_code: string,
-  delivery_status: string,
-  verification_status: string,
-  expires_at: string,
-  verification_time: string,
-  created_at: string,
-  updated_at: string,
-  verification_reference: string,
-  meta_data: unknown,
+  channel: string;
+  token: string;
+  token_type: string;
+  token_length: number;
+  token_duration: string;
+  status: string;
+  phone: string;
+  email: string;
+  reference: string;
+  created_at: string;
+  updated_at: string;
+}
+
+interface SendEMAILResponseData {
+  status: string;
+  email: string;
+}
+
+interface WALLETBALANCEData {
+  wallet_balance: string;
+  business_name: string;
+}
+
+interface NUMBERINSIGHTData {
+  number: {
+    number: string;
+    international_format_number: string;
+    national_format_number: string;
+    country_code: string;
+    country_code_iso3: string;
+    country_name: string;
+    country_prefix: string;
+  };
+}
+
+interface CALLResponseData {
+  id: string;
+  uid: string;
+  phone_number: string;
+}
+
+interface VerifyWHATSAPPResponseData {
+  is_valid: boolean;
+  phone_number: string;
 }

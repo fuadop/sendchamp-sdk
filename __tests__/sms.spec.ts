@@ -1,62 +1,78 @@
+import Sendchamp from "../src";
+import { mobile, publicKey, sender_name } from "../src/config";
+import { SMSRoute, SendchampMode, SenderUseCase } from "../src/constants/types";
 import { SMS } from "../src/services";
 import random from "randomatic";
-import { sendchamp, sender_name } from "../src/test-setup";
-
-let sms: SMS;
-let message_id: string;
-beforeEach(() => {
-  sms = sendchamp.SMS;
-});
-
-afterEach(() => {
-  // @ts-ignore
-  sms = null;
-});
 
 describe("SMS", () => {
-  test("sms.send()", async () => {
-    const res = await sms.send({
-      message: "test_message_node_sdk",
-      sender_name,
-      to: ["2348153207998"],
-      route: "dnd"
+  let sendchamp: Sendchamp;
+  let sms: SMS;
+  beforeEach(() => {
+    sendchamp = new Sendchamp({
+      publicKey,
+      mode: SendchampMode.live,
     });
+    sms = sendchamp.SMS;
+  });
 
-    expect(res.status).toBe("success");
-    expect(res.code).not.toBe("06")
-    expect(typeof res.data.id).toBe("string");
-    // to be used for the sms.getStatus test
-    message_id = res.data.id;
+  afterEach(() => {
+    sendchamp = undefined as unknown as Sendchamp;
+    sms = undefined as unknown as SMS;
   });
 
   test("sms.registerSender()", async () => {
     const name = random("aA", 6);
-    const res = await sms.registerSender({
+    const { code, status, data } = await sms.registerSender({
       sample: "Your otp is 1234",
       name,
-      use_case: "transactional"
+      use_case: SenderUseCase.transactional,
     });
-     
-    expect(res.status).toBe("success");
-    expect(res.code).toBe("200");
-    expect(typeof res.data.uid).toBe("string");
-    expect(res.data.name).toEqual(name);
+
+    expect(status).toBe("success");
+    expect(code).toBe(200);
+    expect(typeof data.uid).toBe("string");
+    expect(data.name).toEqual(name);
   });
 
-  test("sms.getStatus()", async () => {
-    if (!message_id) {
-      const _res = await sms.send({
-        message: "test_message_node_sdk",
-        sender_name: "SDigital",
-        to: ["2348153207998"],
-        route: "dnd"
-      });
-      message_id = _res.data.id;
-    }
+  test("sms.send()", async () => {
+    const res = await sms.send({
+      message: "test_message_node_sdk",
+      sender_name,
+      to: [mobile],
+      route: SMSRoute.dnd,
+    });
 
-    const res = await sms.getStatus(message_id);
+    const {
+      code,
+      status,
+      data: { business_id },
+    } = res;
+    expect(status).toBe("success");
+    expect(code).toBe(200);
+    expect(typeof business_id).toBe("string");
+  });
+
+  test("send.sendBulk(), return successfully", async () => {
+    const res = await sms.send({
+      message: "test_message_node_sdk",
+      sender_name,
+      to: [mobile, "08123456789"],
+      route: SMSRoute.dnd,
+    });
+
     expect(res.status).toBe("success");
-    expect(res.code).toBe("200");
-    expect(res.data.id).toMatch(message_id)
+    expect(res.code).toBe(200);
+    expect(typeof res.data.business_id).toBe("string");
+  });
+
+  test("send.sendBulk(), to throw when non-existing name is used", async () => {
+    expect(async () => {
+      await sms.send({
+        message: "test_message_node_sdk",
+        sender_name: "Non-Existing",
+        to: [mobile, "08123456789"],
+        route: SMSRoute.dnd,
+      });
+    }).rejects.toEqual(new Error("invalid sender name: Non-Existing"));
   });
 });

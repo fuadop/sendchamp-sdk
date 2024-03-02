@@ -1,57 +1,45 @@
-import { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
-import endpoints from '../constants/endpoints';
+import { AxiosInstance, AxiosResponse, AxiosError } from "axios";
+import endpoints from "../constants/endpoints";
 import {
   RegisterSenderConfig,
+  RegisterSenderResponse,
   SendSMSConfig,
   SendSMSResponse,
-} from '../constants/interfaces';
+} from "../constants/interfaces";
 
 class SMS {
   static axiosInstance: AxiosInstance;
 
-  send = async (config: SendSMSConfig): Promise<SendSMSResponse> => {
+  async send(config: SendSMSConfig): Promise<SendSMSResponse> {
     try {
       const response: AxiosResponse<unknown> = await SMS.axiosInstance({
         url: endpoints.SEND_SMS,
-        method: 'POST',
+        method: "POST",
         data: config,
       });
-
       return response.data as SendSMSResponse;
     } catch (error) {
-      const { response } = (error as AxiosError);
+      const { response } = error as AxiosError;
       return response!.data as SendSMSResponse;
     }
-  };
+  }
 
-  getStatus = async (sms_message_id: string): Promise<SendSMSResponse> => {
-    try {
-      const response: AxiosResponse<unknown> = await SMS.axiosInstance({
-        url: endpoints.getReport(sms_message_id),
-        method: 'GET',
-      });
-
-      return response.data as SendSMSResponse;
-    } catch (error) {
-      const { response } = (error as AxiosError);
-      return response!.data as SendSMSResponse;
-    }
-  };
-
-  registerSender = async (config: RegisterSenderConfig): Promise<SendSMSResponse> => {
+  async registerSender(
+    config: RegisterSenderConfig,
+  ): Promise<RegisterSenderResponse> {
     try {
       const response: AxiosResponse<unknown> = await SMS.axiosInstance({
         url: endpoints.REGISTER_SENDER,
-        method: 'POST',
+        method: "POST",
         data: config,
       });
 
-      return response.data as SendSMSResponse;
+      return response.data as RegisterSenderResponse;
     } catch (error) {
-      const { response } = (error as AxiosError);
-      return response!.data as SendSMSResponse;
+      const { response } = error as AxiosError;
+      return response!.data as RegisterSenderResponse;
     }
-  };
+  }
 }
 
 export default SMS;
