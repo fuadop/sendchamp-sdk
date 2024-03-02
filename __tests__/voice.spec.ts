@@ -1,37 +1,63 @@
 import { VOICE } from "../src/services";
-import { sendchamp } from "../src/test-setup";
-
-let voice: VOICE;
-beforeEach(() => {
-  voice = sendchamp.VOICE;
-});
-
-afterEach(() => {
-  // @ts-ignore
-  voice = null;
-});
+import { mobile, publicKey } from "../src/config";
+import Sendchamp from "../src";
+import { SendchampMode, VoiceType } from "../src/constants/types";
 
 describe("VOICE", () => {
-  test("voice.send()", async () => {
-    const res = await voice.send({
-      message: "Your test otp is 1234",
-      repeat: 2,
-      type: "outgoing",
-      customer_mobile_number: ["2348153207998"]
+  let sendchamp: Sendchamp;
+  let voice: VOICE;
+  const textMockData = {
+    message: "Your test otp is 1234",
+    repeat: 2,
+    type: VoiceType.outgoing,
+    customer_mobile_number: [mobile],
+  };
+
+  const audioMockData = {
+    path: "https://pathtoaudiofile",
+    repeat: 2,
+    type: VoiceType.outgoing,
+    customer_mobile_number: [mobile],
+  };
+
+  beforeEach(() => {
+    sendchamp = new Sendchamp({
+      publicKey,
+      mode: SendchampMode.live,
     });
-    expect(res.status).toBe("success");
-    expect(res.code).toBe("200");
-    expect(typeof res.data.id).toBe("string");
+    voice = sendchamp.VOICE;
   });
 
-  test("voice.send() should throw error", async () => {
+  afterEach(() => {
+    sendchamp = undefined as unknown as Sendchamp;
+    voice = undefined as unknown as VOICE;
+  });
+  test("VOICE.sendTextToSpeech, return successfully", async () => {
+    const res = await voice.sendTextToSpeech(textMockData);
+    expect(res.status).toBe("success");
+    expect(res.code).toBe(200);
+    expect(res.data.message).toBe(textMockData.message);
+  });
+
+  test("VOICE.sendTextToSpeech, should throw error", async () => {
     expect(async () => {
-      await voice.send({
-        message: "Your test otp is 1234",
+      await voice.sendTextToSpeech({
+        ...textMockData,
         repeat: -1,
-        type: "outgoing",
-        customer_mobile_number: ["2348153207998"]
       });
+    }).rejects.toEqual(new Error("repeat must be at least 1"));
+  });
+
+  test("VOICE.sendAudioToSpeech, return successfully", async () => {
+    const res = await voice.sendAudioToSpeech(audioMockData);
+    expect(res.status).toBe("success");
+    expect(res.code).toBe(200);
+    expect(typeof res.data.business_uid).toBe("string");
+  });
+
+  test("VOICE.sendAudioToSpeech, should throw error", async () => {
+    expect(async () => {
+      await voice.sendAudioToSpeech({ ...audioMockData, repeat: -1 });
     }).rejects.toEqual(new Error("repeat must be at least 1"));
   });
 });
