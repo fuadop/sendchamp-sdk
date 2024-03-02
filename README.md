@@ -1,9 +1,7 @@
 # Sendchamp Node.js SDK
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 The wrapper provides convinient access to the Sendchamp api from applications written in Node.js.
@@ -253,10 +251,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href="https://github.com/sadiqful"><img src="https://avatars.githubusercontent.com/u/39303081?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Aliyu Abubakar</b></sub></a><br /><a href="#blog-sadiqful" title="Blogposts">📝</a> <a href="#business-sadiqful" title="Business development">💼</a> <a href="#content-sadiqful" title="Content">🖋</a> <a href="#financial-sadiqful" title="Financial">💵</a> <a href="#ideas-sadiqful" title="Ideas, Planning, & Feedback">🤔</a> <a href="#mentoring-sadiqful" title="Mentoring">🧑‍🏫</a> <a href="#platform-sadiqful" title="Packaging/porting to new platform">📦</a> <a href="#question-sadiqful" title="Answering Questions">💬</a> <a href="#tutorial-sadiqful" title="Tutorials">✅</a> <a href="#talk-sadiqful" title="Talks">📢</a></td>
-    <td align="center"><a href="http://fuadolatunji.me"><img src="https://avatars.githubusercontent.com/u/65264054?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Fuad Olatunji</b></sub></a><br /><a href="https://github.com/fuadop/sendchamp-sdk/issues?q=author%3Afuadop" title="Bug reports">🐛</a> <a href="https://github.com/fuadop/sendchamp-sdk/commits?author=fuadop" title="Code">💻</a> <a href="#infra-fuadop" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-fuadop" title="Maintenance">🚧</a> <a href="#design-fuadop" title="Design">🎨</a> <a href="#example-fuadop" title="Examples">💡</a> <a href="#security-fuadop" title="Security">🛡️</a> <a href="#tool-fuadop" title="Tools">🔧</a> <a href="#userTesting-fuadop" title="User Testing">📓</a></td>
-  </tr>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/sadiqful"><img src="https://avatars.githubusercontent.com/u/39303081?v=4?s=100" width="100px;" alt="Aliyu Abubakar"/><br /><sub><b>Aliyu Abubakar</b></sub></a><br /><a href="#blog-sadiqful" title="Blogposts">📝</a> <a href="#business-sadiqful" title="Business development">💼</a> <a href="#content-sadiqful" title="Content">🖋</a> <a href="#financial-sadiqful" title="Financial">💵</a> <a href="#ideas-sadiqful" title="Ideas, Planning, & Feedback">🤔</a> <a href="#mentoring-sadiqful" title="Mentoring">🧑‍🏫</a> <a href="#platform-sadiqful" title="Packaging/porting to new platform">📦</a> <a href="#question-sadiqful" title="Answering Questions">💬</a> <a href="#tutorial-sadiqful" title="Tutorials">✅</a> <a href="#talk-sadiqful" title="Talks">📢</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://fuadolatunji.me"><img src="https://avatars.githubusercontent.com/u/65264054?v=4?s=100" width="100px;" alt="Fuad Olatunji"/><br /><sub><b>Fuad Olatunji</b></sub></a><br /><a href="https://github.com/fuadop/sendchamp-sdk/issues?q=author%3Afuadop" title="Bug reports">🐛</a> <a href="https://github.com/fuadop/sendchamp-sdk/commits?author=fuadop" title="Code">💻</a> <a href="#infra-fuadop" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#maintenance-fuadop" title="Maintenance">🚧</a> <a href="#design-fuadop" title="Design">🎨</a> <a href="#example-fuadop" title="Examples">💡</a> <a href="#security-fuadop" title="Security">🛡️</a> <a href="#tool-fuadop" title="Tools">🔧</a> <a href="#userTesting-fuadop" title="User Testing">📓</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://igbiriki.com"><img src="https://avatars.githubusercontent.com/u/49701046?v=4?s=100" width="100px;" alt="The L D O"/><br /><sub><b>The L D O</b></sub></a><br /><a href="https://github.com/fuadop/sendchamp-sdk/commits?author=igmrrf" title="Code">💻</a> <a href="#tool-igmrrf" title="Tools">🔧</a> <a href="https://github.com/fuadop/sendchamp-sdk/commits?author=igmrrf" title="Documentation">📖</a></td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->

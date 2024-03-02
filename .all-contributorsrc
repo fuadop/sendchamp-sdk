@@ -39,6 +39,17 @@
         "tool",
         "userTesting"
       ]
+    },
+    {
+      "login": "igmrrf",
+      "name": "The L D O",
+      "avatar_url": "https://avatars.githubusercontent.com/u/49701046?v=4",
+      "profile": "https://igbiriki.com",
+      "contributions": [
+        "code",
+        "tool",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -46,5 +57,7 @@
   "projectOwner": "fuadop",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitType": "docs",
+  "commitConvention": "angular"
 }
