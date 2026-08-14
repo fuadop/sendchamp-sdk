@@ -86,6 +86,15 @@ After initialization, you can get instances of offered services as follows:
 - VOICE Service : `sendchamp.VOICE`
 - VERIFICATION Service: `sendchamp.VERIFICATION`
 
+## Core Methods
+
+- `sendchamp.getWalletBalance()`: Retrieve your Sendchamp wallet balance.
+
+- `sendchamp.getNumberInsight({phone_number, type})`: API for getting number insight.
+
+  - `phone_number`: The phone number to get insight for.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+  - `type`: Type of insight (e.g. `core` or `basic`).<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
 ## Services
 
 All methods are asynchronous.<br/>
@@ -228,6 +237,35 @@ Refer to the whatsapp test file ([**tests**/whatsapp.spec.ts](__tests__/whatsapp
   - `recipient`: This will be the phone number of the customer E.g 234811111111.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
   - `link`: This is the URL to the video resource.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+### EMAIL Service
+
+```javascript
+const email = sendchamp.EMAIL;
+```
+
+- `email.send({subject, to, from, message_body})`: API for sending emails. Refer to email test file([__tests__/email.spec.ts](__tests__/email.spec.ts)) to see usage.
+
+  - `subject`: The subject of the email.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
+
+  - `to`: An array of objects containing the recipient's email and name. Example: `[{ email: "recipient@example.com", name: "Recipient" }]`.<br/> <mark>ARRAY</mark> <mark>REQUIRED</mark>
+
+  - `from`: An object containing the sender's email and name. Example: `{ email: "sender@example.com", name: "Sender" }`.<br/> <mark>OBJECT</mark> <mark>REQUIRED</mark>
+
+  - `message_body`: An object containing the message type and value. Example: `{ type: "text/html", value: "This is the contents of a test" }`.<br/> <mark>OBJECT</mark> <mark>REQUIRED</mark>
+
+### CALL Service
+
+```javascript
+const call = sendchamp.CALL;
+```
+
+- `call.create()`: API for creating a voice call. Refer to call test file([__tests__/call.spec.ts](__tests__/call.spec.ts)) to see usage.
+
+- `call.listVoiceCalls()`: API for retrieving a list of voice calls.
+
+- `call.retrieveSingleCall(call_id)`: API to retrieve the report for a single call.
+  - `call_id`: The ID of the call to retrieve.<br/> <mark>STRING</mark> <mark>REQUIRED</mark>
 
 ## Contributing
 
